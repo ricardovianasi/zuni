@@ -1,0 +1,143 @@
+<!--NOVO ALBUM-->
+<div class="upload__bx" ng-if="upload && !content.id">
+    <h2 class="title">Criar novo álbum</h2>
+    <div class="upload__bx__photos">
+        <div class="upload__bx__photos__container">
+            <zn-thumb class="thumb" ng-repeat="fileItem in upload"></zn-thumb>
+        </div>
+    </div>
+    <div zn-upload-photo class="upload__bx__album">
+        <div class="privacity__bx">
+            <div class="privacity__bx__header">
+                <h2 class="title">Privacidade</h2>
+                <zn-select-privacity privacity="'public'"></zn-select-privacity>
+            </div>
+            <div class="privaicty__bx__tags" ng-if="privacityOption !== 'public'">
+                <h3 class="sub-title">Selecione abaixo as pessoas que poderam acessar esse album:</h3>
+
+                <ui-select multiple ng-model="content.share" theme="select2" ng-disabled="disabled">
+                    <ui-select-match placeholder="Compartilhar com:">{{ $item.name }}</ui-select-match>
+                    <ui-select-choices repeat="node in UsersGroupsHints | filter: $select.search">
+                        {{ node.name }}
+                    </ui-select-choices>
+                </ui-select>
+
+                <!--TAGS COMPONENT-->
+                <!-- <zn-tags tags-array="groups" config="{
+                    name: 'Compartilhar com:',
+                    hint: 'share',
+                    prefix: 'name',
+                    namespace: 'UploadGroups',
+                    ID: 0
+                }"></zn-tags> -->
+                <!--END TAGS COMPONENT-->
+
+            </div>
+        </div>
+        <form>
+            <fieldset>
+                <div ng-show="form_error != ''" class="form_error">{{form_error}}</div>
+                <label for="#" class="medium">
+                    <input type="text" placeholder="Digite o nome do album" ng-model="content.name">
+                </label>
+                <label for="#" class="location-field">
+                    <angucomplete-alt
+                        id="photo_edit_location"
+                        placeholder="Endereço do Álbum"
+                        selected-object="content.location"
+                        local-data="$parent.LocationHints"
+                        search-fields="name"
+                        title-field="name"
+                        initial-value="{{photo.location.name}}"
+                        input-class="selectize-input location-field"
+                        override-suggestions="true">
+                </label>
+                <label for="#">
+                    <textarea name="" id="" cols="30" rows="5" placeholder="Descrição do album"
+                              ng-model="content.description"></textarea>
+                </label>
+                <label for="" class="js-album-tags">
+                    <ui-select multiple tagging="tagTransform" tagging-label="false" tagging-tokens=","
+                               ng-model="content.tags" theme="select2" ng-disabled="disabled">
+                        <ui-select-match placeholder="Tags:">{{ $item.tag ? $item.tag : $item.name }}</ui-select-match>
+                        <ui-select-choices repeat="tag in $parent.TagsHints | filter:$select.search">
+                            {{ tag.tag ? tag.tag : tag.name }}
+                        </ui-select-choices>
+                    </ui-select>
+                    <!--TAGS COMPONENT-->
+                    <!-- <zn-tags tags-array="[]" sync-master="true" config="{
+                        hint: 'tags',
+                        prefix: 'tag',
+                        input: true,
+                        namespace: 'uploadNewAlbum',
+                        ID: 1
+                    }"></zn-tags> -->
+                    <!--END TAGS COMPONENT-->
+                </label>
+                <label for="" class="submit-row">
+                    <button type="button" class="btn--submit submit-button" ng-click="create();">Criar álbum</button>
+                    <button type="button" class="btn--clean submit-button" ng-click="cancel();">Cancelar</button>
+                </label>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<!--ALBUM EXISTENTE-->
+<div class="upload__bx" ng-if="upload && content.id">
+    <h2 class="title">Inserir novas fotos no álbum {{content.name}}</h2>
+    <div class="upload__bx__photos">
+        <div class="upload__bx__photos__container">
+            <zn-thumb class="thumb" ng-repeat="fileItem in upload"></zn-thumb>
+        </div>
+    </div>
+    <div zn-upload-photo class="upload__bx__album">
+        <div class="upload__bx__header">
+            <h2 class="title">Ações em massa para as fotos carregadas:</h2>
+            <h3 class="sub-title">O conteúdo referente a <strong>endereço</strong> e <strong>tags</strong>, serão
+                aplicados somente para as novas fotos.</h3>
+        </div>
+        <form>
+            <fieldset>
+                <label for="#" class="location-field">
+                    <angucomplete-alt
+                        id="photo_edit_location"
+                        placeholder="Endereço do Álbum"
+                        selected-object="content.location"
+                        local-data="$parent.LocationHints"
+                        search-fields="name"
+                        title-field="name"
+                        initial-value="{{ (content.location.name || '') }}"
+                        input-class="selectize-input location-field"
+                        override-suggestions="true">
+                </label>
+                <label for="" class="js-album-tags">
+
+                    <ui-select multiple tagging="tagTransform" tagging-label="false" tagging-tokens=","
+                               ng-model="content.tags" theme="select2" ng-disabled="disabled">
+                        <ui-select-match placeholder="Tags:">{{ $item.tag ? $item.tag : $item.name }}</ui-select-match>
+                        <ui-select-choices repeat="tag in $parent.TagsHints | filter:$select.search">
+                            {{ tag.tag ? tag.tag : tag.name }}
+                        </ui-select-choices>
+                    </ui-select>
+
+                    <!--TAGS COMPONENT-->
+                    <!-- <zn-tags tags-array="content.tags" sync-master="true" config="{
+                        hint: 'tags',
+                        input: true,
+                        prefix: 'tag',
+                        namespace: 'uploadExistAlbum',
+                        ID: content.id
+                    }"></zn-tags> -->
+                    <!--END TAGS COMPONENT-->
+
+                </label>
+                <label for="" class="submit-row">
+                    <button type="button" class="btn--submit submit-button" ng-click="create(content.id);">Salvar
+                    </button>
+                    <button type="button" class="btn--clean submit-button" ng-click="cancel();">Cancelar</button>
+                </label>
+            </fieldset>
+        </form>
+    </div>
+</div>

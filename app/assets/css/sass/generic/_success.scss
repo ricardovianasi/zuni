@@ -1,0 +1,17 @@
+label.success,
+div.success,
+form.success,
+ {
+	p {
+		color: #ABF0B4;
+		text-shadow: 1px 1px 1px #595353;
+	}
+}
+
+.success--hide {
+	display: none;
+}
+
+.success--show {
+	display: block;
+}

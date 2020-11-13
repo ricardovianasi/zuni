@@ -1,0 +1,84 @@
+<!-- Application Header -->
+<zn-header></zn-header>
+<!-- End Application Header -->
+
+
+<!-- Application Content -->
+<main ng>
+    <div class="container">
+        <div class="albums__actions albums__actions--details">
+            <div class="actions__left">
+                <div class="js-select-actions">
+                    <a ng-href="#/albums/" class="btn--cancel all-album">Voltar para os álbuns</a>
+                </div>
+            </div>
+        </div>
+
+        <section class="user__data user__data--manager">
+            <h2 class="title">Perfis</h2>
+
+            <div class="user__data__header">
+                <div class="header__left">
+                    <form action="">
+                        <input type="text" ng-model="uProfile" placeholder="Pesquisar perfis">
+                    </form>
+                </div>
+                <div class="header__right">
+                    <button class="btn--submit">Novo perfil</button>
+                </div>
+            </div>
+
+            <div class="user__data__list user__data__list--1-5">
+                <div class="table-list table-list--fixed">
+                    <div class="table-list__container">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>
+                                    <div class="th-inner">
+                                        <button class="filter" ng-click="vm.order('name', $event)">Perfil</button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="th-inner">
+                                        <button class="filter" ng-click="vm.order('origin', $event)">Permissões</button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="th-inner">
+                                        <button class="filter" ng-click="vm.order('profiles[0].name', $event)">
+                                            Usuários
+                                        </button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="th-inner">
+                                        <button>Ações</button>
+                                    </div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="profile in vm.profiles | filter:uProfile">
+                                <td>{{ ::profile.name }}</td>
+                                <td>{{ ::profile.origin || 'Não possui origem'}}</td>
+                                <td>{{ ::vm.formatProfiles(profile.profiles) || 'Não possui perfil'}}</td>
+                                <td>
+                                    <button class="edit-button"></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<!-- End Application Content -->
+
+<!-- Application Footer -->
+<footer>
+
+</footer>
+<!-- End Application Footer -->

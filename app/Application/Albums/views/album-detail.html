@@ -1,0 +1,189 @@
+<!-- Application Header -->
+<zn-header filter="true" album="vm.detail.album" user="currentUser"></zn-header>
+<!-- End Application Header -->
+
+<!-- Application Content -->
+<main>
+    <div class="container">
+        <div zn-select class="albums">
+            <div class="albums__header">
+<<<<<<< HEAD
+                <div class="header__info header__info--left">
+=======
+                <div class="header__info header__info-grid9">
+>>>>>>> develop
+                    <div class="albums__header__details">
+                        <h1>{{ vm.detail.album.name }}</h1>
+                        <div class="date">
+                            Criado em
+                            <time datatime="{{ vm.detail.album.created_at }}">{{ vm.detail.album.created_at }}</time>
+                        </div>
+                        <div class="location">
+                            <span class="location-address" ng-if="vm.detail.album.location">{{ vm.detail.album.location.name }}</span>
+                        </div>
+                        <div class="description">
+                            <p>{{ vm.detail.album.description }}</p>
+                        </div>
+                    </div>
+                </div>
+<<<<<<< HEAD
+                <div class="header__info header__info--right">
+=======
+                <div class="header__info header__info-grid3">
+>>>>>>> develop
+                    <div class="albums__header__privacity">
+                        <span class="privacity__view"
+                              ng-class="{public: vm.detail.album.visibility === 'public', private: vm.detail.album.visibility === 'private'}">Visibilidade</span>
+                    </div>
+                    <div class="tags__bx" ng-if="vm.detail.album.tags.length > 0">
+                        <ul class="tags__list tags__list--right">
+                            <li class="tags__list__content__item"
+                                ng-repeat="tags in ::vm.detail.album.tags track by tags.id">
+                                <span>{{ tags.tag }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="albums__actions albums__actions--details">
+                <div class="actions__left">
+                    <div ng-hide="onSelect">
+                        <a ng-href="#/albums/" class="btn--cancel all-album">Todos os álbuns</a>
+                    </div>
+                    <div class="select__actions--active" ng-if="onSelect">
+                        <button class="btn--cancel" ng-click="cancelSelect();">Cancelar</button>
+                        <button class="btn--clean" ng-click="selectAllItens();">Marcar Todos</button>
+                    </div>
+                </div>
+                <div class="actions__right" ng-if="!isMobile">
+                    <div ng-if="!onSelect">
+                        <button class="btn--submit edit-album" ng-click="editThisAlbum(vm.detail.album.id);"
+                                ng-if="isAuthorized('album', 'update');">Editar álbum
+                        </button>
+                        <button class="btn--clean" ng-click="selectItens();">Selecionar</button>
+                    </div>
+                </div>
+                <div class="main__actions" ng-if="selected">
+                    <!-- <button class="btn--grey action action--right" title="Compartilhar imagem">Compartilhar</button> -->
+                    <button zn-download class="btn--download action--right" ng-click="download(vm.detail.album.id);"
+                            title="Baixar imagem" ng-if="isAuthorized('image', 'download');"></button>
+                    <button zn-move class="btn--move action--right" title="Mover imagem"
+                            ng-click="openMoveDialog();"></button>
+                    <button zn-delete class="btn--delete action--right" title="Deletar imagem"
+                            ng-click="openDeleteDialog({type: 'multiple'});"></button>
+                    <button zn-edit-all class="btn--grey action action--left" title="Deletar imagem">Editar tags, local
+                        e autor
+                    </button>
+                </div>
+            </div>
+            <div class="albums__list albums__list--details">
+                <div class="albums__list__bx">
+                    <div zn-add-photo zn-upload class="album album--add js-add-photo"
+                         ng-if="isAuthorized('album', 'create') && !isMobile">
+                        <div class="album__bx">
+                            <button class="add-new-album" ng-click="selectPhotos();">Incluir Fotos</button>
+                        </div>
+                        <input type="file" nv-file-select="" uploader="uploader" multiple="multiple" accept="image/*"
+                               ng-if="uploader" style="display: none;">
+                        <zn-modal class="zuni-dialog zuni-dialog--open" ng-if="readyUpload">
+                            <div class="upload__ready">
+                                <span class="title">Preparando upload...</span>
+                                <div class="upload__ready__bx">
+                                    <span class="progress" ng-style="{ 'width': progress + '%' }"></span>
+                                </div>
+                            </div>
+                        </zn-modal>
+                    </div>
+                    <zn-modal class="zuni-dialog zuni-dialog--large" ng-class="{'zuni-dialog--open': openCreate}">
+                        <zn-upload-content upload="uploadItens" content="vm.detail.album"></zn-upload-content>
+                    </zn-modal>
+<<<<<<< HEAD
+                    <div class="album js-album-item" ng-repeat="photo in vm.detail.photos track by photo.id">
+=======
+                    <div class="album js-album-item" dir-paginate="photo in vm.detail.photos | itemsPerPage: 15 track by photo.id">
+>>>>>>> develop
+
+                        <div class="album__bx">
+                            <a ng-href="#/albums/{{ ::vm.detail.album.id }}/{{ ::photo.id }}/" title="{{ ::photo.name }}" class="image__link">
+                                <div class="album__image">
+                                    <img ng-src="{{ ::photo.thumbnail_url }}" alt="{{ ::photo.name }}">
+                                </div>
+                                <div class="image__info" ng-if="photo.description">
+                                    <span class="name">{{ ::photo.description }}</span>
+                                </div>
+                            </a>
+
+                            <zn-actions ng-if="isAuthorized('album', 'update') && !isMobile"></zn-actions>
+
+                            <div class="album__actions" ng-if="onSelect" ng-click="selectThisIten($event)">
+                                <input type="checkbox" name="" id="{{::photo.id}}" class="radio-item js-check"
+                                       ng-checked="allSelected">
+                                <label class="radio-label" name="check"></label>
+                            </div>
+                        </div>
+                    </div>
+<<<<<<< HEAD
+                </div>
+            </div>
+=======
+
+                </div>
+            </div>
+
+            <dir-pagination-controls></dir-pagination-controls>
+
+>>>>>>> develop
+        </div>
+    </div>
+</main>
+<!-- End Application Content -->
+
+<!-- Move modal -->
+<zn-modal class="zuni-dialog js-move-all-dialog">
+    <div zn-move>
+        <div class="zuni-dialog__content__header">
+            <span class="title">Mover foto(s) selecionadas:</span>
+        </div>
+        <div class="move__cotent">
+            <div class="move__bx">
+                <span class="title">Mover de:</span>
+                <span class="move-from">{{ vm.detail.album.name }}</span>
+            </div>
+            <div class="move__bx">
+                <span class="title">Para:</span>
+                <div class="select select--zuni">
+                    <button ng-class="{active: open}" ng-click="openSelect();">{{ name }}</button>
+                    <ul class="select__list">
+                        <li ng-repeat="album in albumsToMove track by album.id"
+                            ng-click="getName(album.id, album.name);">{{ album.name }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="action__row">
+            <button class="btn--submit" ng-click="confirmMove({list: vm.detail.photos, type:'all'});">Mover</button>
+            <button class="btn--clean" ng-click="cancel();">Cancelar</button>
+        </div>
+    </div>
+</zn-modal>
+
+<!-- Delete modal -->
+<zn-modal class="zuni-dialog js-delete-all-dialog">
+    <div zn-delete>
+        <div class="zuni-dialog__content__header">
+            <span class="title">Deseja realmente excluir as fotos selecionadas?</span>
+        </div>
+        <div class="action__row">
+            <button class="btn--cancel" ng-click="confirmDelete({list: vm.detail.photos, type: 'multiple'});">Excluir
+            </button>
+            <button class="btn--clean" ng-click="cancel();">Cancelar</button>
+        </div>
+    </div>
+</zn-modal>
+
+<!-- Application Footer -->
+<footer>
+
+</footer>
+<!-- End Application Footer -->

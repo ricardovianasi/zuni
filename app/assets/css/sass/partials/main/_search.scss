@@ -1,0 +1,30 @@
+.search-title {
+	color: #D0D0D0;
+	margin-top: 0.5em;
+	@extend %f18;
+
+	span {
+		color: #fff;
+	}
+}
+
+.filter__area {
+	@extend .cf;
+	
+	.title {
+		color: #fff;
+		display: block;
+		float: left;
+		margin-top:0.8em;
+		@extend %f16;
+	}
+
+	.filter {
+		float: right;
+		margin-left: 1em;
+
+		select {
+			color: #212021;
+		}
+	}
+}

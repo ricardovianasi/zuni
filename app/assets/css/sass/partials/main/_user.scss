@@ -1,0 +1,202 @@
+.user__data {
+    margin: 4em;
+    @include grid(6);
+    @include prefix(3);
+    @include suffix(3);
+    @include grid_parent;
+    @include breakpoint(up-to-sm) {
+        @include grid(12);
+        @include prefix(0);
+        @include suffix(0);
+    }
+    > .title {
+        color: $primary-color;
+        font-weight: 400;
+        margin-bottom: 2em;
+        @include grid(12);
+        @extend %f36;
+        @include breakpoint(up-to-sm) {
+            @include grid(12);
+        }
+    }
+}
+.user__data__left {
+    @include grid(6);
+    @include breakpoint(up-to-sm) {
+        @include grid(12);
+    }
+}
+.user__data__right {
+    @include grid(5);
+    @include prefix(1);
+    @include breakpoint(up-to-sm) {
+        @include grid(12);
+        @include prefix(0);
+    }
+    .user__image {
+        margin-bottom: 2em;
+        @extend .cf;
+    }
+    .user__image__category, .user__image__profile {
+        @include grid(6);
+        @include breakpoint(up-to-sm) {
+            @include grid(12);
+        }
+    }
+    .user__image__profile {
+        padding-right: 0;
+    }
+    .user__image__category {
+        text-align: center;
+        padding-left: 0;
+        .category {
+            background: $red-color;
+            display: block;
+            width: 85px;
+            height: 85px;
+            padding: 26.5px 21.5px;
+            margin: 0 auto 0.8em auto;
+            @include vendor(border-radius, 42.5px);
+            &:before {
+                content: "";
+                display: block;
+                @extend .icons-icon-photographer;
+            }
+        }
+        .title {
+            @extend %f18;
+            color: #FFF;
+        }
+    }
+    .user__password {
+        margin-top: 4em;
+    }
+    .user__password__form {
+        @include opacity(0);
+        visibility: hidden;
+        @include vendor(transition, opacity 0.5s ease);
+        > .title {
+            display: block;
+            margin-bottom: 2em;
+            width: 100%;
+            color: $primary-color;
+            @extend %f-regular;
+            @extend %f16;
+        }
+    }
+    .user__password__form.active {
+        @include opacity(1);
+        visibility: visible;
+    }
+    .user__password__button {
+        @extend .cf;
+        .pwd__button {
+            margin-bottom: 2em;
+            display: inline-block;
+            float: right;
+            width: auto;
+        }
+    }
+}
+.user__data {
+    form {
+        @include grid(12);
+          margin-left: -16px;
+          margin-right: -16px;
+    }
+    .form-wrapper {
+        @include grid(12);
+        margin-top: 1.5em;
+        @extend .cf;
+        @include breakpoint(up-to-sm) {
+            @include grid(12);
+        }
+        .label {
+            color: #FFF;
+            display: inline-block;
+            @extend %f16;
+            @include grid(4);
+            @include breakpoint(up-to-sm) {
+                width: 100%;
+                float: none;
+                display: block;
+                padding: 0;
+                margin-bottom: 0.5em;
+            }
+        }
+        .input {
+            padding: 0.7em 1em;
+            display: inline;
+            height: 48px;
+            @extend %f14;
+            @include grid(8);
+            @include breakpoint(up-to-sm) {
+                width: 100%;
+            }
+        }
+        .input.input--tags {
+            padding: 0;
+            height: auto;
+            @extend %f10;
+        }
+        textarea {
+            height: 110px;
+        }
+    }
+    .form-wrapper.action__row {
+        button, a {
+            width: auto;
+            margin-right: 0.5em;
+        }
+
+        button:first-child,
+        a:first-child {
+            margin-right: 0;
+        }
+    }
+    .form-wrapper--submit {
+        .submit {
+            float: right;
+            margin-left: 0.5em;
+            width: auto;
+        }
+    }
+    .form-wrapper:first-child {
+        margin-top: 0;
+    }
+
+    .form-wrapper--compress {
+        .label {
+            text-align: left;
+            @include grid(3);
+        }
+
+        .input {
+            @include grid(9);
+        }
+    }
+
+    .form-wrapper--full {
+        .label {
+            display: block;
+            width: 100%;
+            margin: 0 0 0.5em -8px;
+            text-align: left;
+        }
+    
+        .input{
+            width: 100%;
+            display: block;
+        }
+    }
+
+    .form-wrapper--dual {
+        @include grid(6);
+        @extend .form-wrapper--full;
+
+        .tags__list--field input {
+            padding: 0.7em 0.4em;
+            max-height: 32px;
+        }
+    }
+}

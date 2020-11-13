@@ -1,0 +1,65 @@
+<div class="thumb__bx">
+    <div class="thumb__bx__image">
+        <canvas/>
+    </div>
+    <div class="thumb__bx__info">
+        <form>
+            <fieldset>
+                <label for="date-{{index}}" class="dual">
+
+                    <input zn-date-mask id="date-{{index}}" type="text" placeholder="__/__/____" required
+                           class="js-thumb-date" maxlength="10" ng-disabled="fileItem.noDate"
+                           ng-model="fileItem.formatted_date">
+
+                </label>
+                <label for="no-date-{{index}}" class="dual">
+                    <span class="check-button">
+                        <input type="checkbox" ng-model="fileItem.noDate" id="no-date-{{index}}"
+                               ng-init="photo.noDate = (photo.formatted_date ? false : true)">
+                        <span>Sem data</span>
+                    </span>
+                </label>
+                <label class="location-field">
+                    <angucomplete-alt
+                        id="album_add_location"
+                        placeholder="Endereço do Álbum"
+                        selected-object="fileItem.location"
+                        local-data="$parent.LocationHints"
+                        search-fields="name"
+                        title-field="name"
+                        initial-value="{{ (content.location ? content.location.name : '') }}"
+                        input-class="selectize-input js-thumb-location"
+                        override-suggestions="true">
+                </label>
+                <label for="author" class="author-field">
+                    <angucomplete-alt
+                        id="album_add_author"
+                        placeholder="Autor"
+                        selected-object="fileItem.owner"
+                        local-data="$parent.AuthorHints"
+                        search-fields="name"
+                        title-field="name"
+                        initial-value="{{ (content.owner ? content.owner.name : '') }}"
+                        input-class="selectize-input js-thumb-author"
+                        override-suggestions="true">
+
+                </label>
+                <label>
+
+                    <ui-select multiple ng-init="fileItem.tags = content.tags" tagging="tagTransform"
+                               ng-model="fileItem.tags" theme="select2" ng-disabled="disabled">
+                        <ui-select-match placeholder="Tags:">{{ $item.tag ? $item.tag : $item.name }}</ui-select-match>
+                        <ui-select-choices repeat="tag in $parent.TagsHints | filter:$select.search">
+                            {{ tag.tag ? tag.tag : tag.name }}
+                        </ui-select-choices>
+                    </ui-select>
+
+                </label>
+                <label>
+                    <textarea name="" id="" cols="30" rows="5" placeholder="Descrição da foto"
+                              ng-model="fileItem.description" class="js-thumb-description"></textarea>
+                </label>
+            </fieldset>
+        </form>
+    </div>
+</div>

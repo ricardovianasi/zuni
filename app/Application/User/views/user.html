@@ -1,0 +1,134 @@
+<!-- Application Header -->
+<zn-header></zn-header>
+<!-- End Application Header -->
+
+
+<!-- Application Content -->
+<main ng>
+    <div class="container">
+        <div class="albums__actions albums__actions--details">
+            <div class="actions__left">
+                <div class="js-select-actions">
+                    <a ng-href="#/albums/" class="btn--cancel all-album">Voltar para os álbuns</a>
+                </div>
+            </div>
+        </div>
+        <section class="user__data">
+            <h2 class="title">Meus dados</h2>
+            <div class="user__data__left">
+                <form action="">
+                    <div class="form-wrapper">
+                        <label class="label">Nome:</label>
+                        <input type="text" class="input" id="expire" disabled="disabled" name="expire"
+                               value="{{ vm.user.name }}"/>
+                    </div>
+
+                    <div class="form-wrapper">
+                        <label class="label">Grupos:</label>
+                        <!--TAGS COMPONENT-->
+                        <zn-tags tags-array="vm.user.groups" config="{
+                            name: 'Add group:',
+                            hint: 'share',
+                            prefix: 'name',
+                            namespace: 'UserGroups',
+                            ID: 0,
+                            disabled: true
+                        }" class="input input--tags"></zn-tags>
+                        <!--END TAGS COMPONENT-->
+                    </div>
+
+                    <div class="form-wrapper">
+                        <label for="mail" class="label">Email:</label>
+                        <input type="text" class="input" disabled="disabled" name="mail" value="{{ vm.user.email }}"/>
+                    </div>
+
+                    <div class="form-wrapper">
+                        <label for="origin" class="label">Origem:</label>
+                        <input type="text" class="input" disabled="disabled" name="origin"
+                               value="{{ vm.user.origin }}"/>
+                    </div>
+
+                    <div class="form-wrapper">
+                        <label for="tel" class="label">Telefone:</label>
+                        <input type="text" class="input" disabled="disabled" name="tel" value="{{ vm.user.phone }}"/>
+                    </div>
+
+                    <div class="form-wrapper" ng-if="vm.user.expires_at">
+                        <label for="expire" class="label">Data de expiração:</label>
+                        <input type="text" class="input" name="expire" disabled="disabled"
+                               value="{{ vm.user.formatted_expires_at }}"/>
+                    </div>
+                </form>
+            </div>
+            <div class="user__data__right">
+                <div class="user__image">
+                    <div class="user__image__category">
+                        <span class="category"></span>
+                        <span class="title"> {{ vm.user.profiles[0].name }}</span>
+                    </div>
+                    <div class="user__image__profile">
+                        <img ng-src="{{ ::vm.user.avatar_url }}"/>
+
+                        <!--Edit-->
+                        <div zn-change-picture class="album__actions--edit">
+                            <button class="edit-button" ng-click="changePicture();"></button>
+                            <input type="file" style="display: none;">
+                        </div>
+
+                    </div>
+                </div>
+                <div zn-change-password class="user__password">
+                    <div class="user__password__button" ng-if="!change">
+                        <button class="btn--submit pwd__button" ng-click="openChange();">Alterar senha</button>
+                    </div>
+
+                    <div class="user__password__form" ng-class="{ active: change }">
+                        <p class="title">Preencha os campos abaixo para alterar a sua senha.</p>
+
+                        <form class="change__passwd__form">
+                            <div class="form-wrapper">
+                                <label class="label">Senha atual:</label>
+                                <input type="password" class="input" name="expire" ng-model="password.oldPass"/>
+                            </div>
+                            <div class="form-wrapper">
+                                <label class="label">Nova senha:</label>
+                                <input type="password" class="input" name="expire" ng-model="password.pass"/>
+                            </div>
+                            <div class="form-wrapper">
+                                <label class="label">Confirmação da nova senha:</label>
+                                <input type="password" class="input" name="expire" ng-model="password.confirmPass"/>
+                            </div>
+
+                            <div class="form-wrapper form-wrapper--submit">
+                                <button type="button" class="btn--submit submit" ng-click="changePassword();">Salvar
+                                </button>
+                                <button type="button" class="btn--cancel submit" ng-click="cancelChange();">Cancelar
+                                </button>
+                            </div>
+
+                            <div zn-message state="err">
+                                <h2 class="title">Ocorreram os seguinte erros:</h2>
+                                <ul class="messages__list">
+                                    <li class="messages__list__item">{{ err.message }}</li>
+                                </ul>
+                            </div>
+                            <div zn-message state="success">
+                                <h2 class="title">Alteração de senha:</h2>
+                                <ul class="messages__list">
+                                    <li class="messages__list__item">{{ success.message }}</li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<!-- End Application Content -->
+
+<!-- Application Footer -->
+<footer>
+
+</footer>
+<!-- End Application Footer -->

@@ -1,0 +1,90 @@
+.auth {
+    width: 100%;
+    height: 100%;
+}
+.auth__bx {
+    position: absolute;
+    width: 360px;
+    top: 50%;
+    left: 50%;
+    margin: -300px 0 0 -180px;
+    background: #000;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 5em;
+    @include vendor(border-radius, 0.9em);
+    @include breakpoint(up-to-xs) {
+        width: 100%;
+        top: 0;
+        left: 0;
+        margin: 0;
+        height: 100%;
+        padding: 2.5em;
+    }
+    p {
+        color: #fff;
+        margin: 1em 0;
+        @extend %f14;
+    }
+    .forget__bx {
+        text-align: right;
+        button {
+            border: none;
+            background: transparent;
+            color: #fff;
+            width: auto;
+            padding: 0;
+            float: right;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .error,.success {
+        display: none;
+    }
+}
+.auth__bx__logo {
+    margin: 2em auto;
+    text-align: center;
+    img {
+        max-width: 70%;
+        display: inline-block;
+    }
+}
+.auth__bx__form {
+    //Default font size
+    a, button, span {
+        @include vendor(box-shadow, none);
+        @extend %f14;
+    }
+    label {
+        margin: 0.9em 0;
+        @extend .cf;
+    }
+    span {
+        color: #fff;
+    }
+    input[type="checkbox"] {
+        float: left;
+        margin: 2px 0.5em 0 0;
+    }
+}
+.auth__footer {
+    position: absolute;
+    bottom: 10em;
+    width: 100%;
+	text-align: center;
+
+    @include breakpoint(up-to-xs) {
+        bottom: 1em;
+
+        img {
+            max-width: 30%;
+        }
+    }
+
+    img {
+        display: inline-block;
+    }
+}

@@ -1,0 +1,6 @@
+{
+  "BASE": {
+    "url": "https://app-des.adm-serv.ufmg.br/webservice",
+    "path": "https://app-des.adm-serv.ufmg.br/zuni/"
+  }
+}

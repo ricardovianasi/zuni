@@ -1,0 +1,28 @@
+.move__cotent {
+	margin: 3em 0;
+}
+
+.move__bx {
+	margin-top: 2em;
+	@extend .cf;
+	.title {
+		color: #fff;
+		display: block;
+		float: left;
+
+		@extend %f16;
+	}
+}
+
+.move__bx:first-child {
+	margin-top: 0;
+}
+
+.move-from,
+.move-to,
+.select {
+	color: #fff;
+	font-style: italic;
+	float: right;
+	@extend %f16;
+}

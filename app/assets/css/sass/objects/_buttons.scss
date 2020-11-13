@@ -1,0 +1,84 @@
+/*------------------------------------*\
+    #BUTTONS
+\*------------------------------------*/
+
+.btn {
+    cursor: pointer;
+    display: inline-block;
+    border: none;
+    padding: 0.7em 2em;
+    width: 100%;
+    @include vendor(border-radius, 0.5em);
+    @extend %f15;
+
+    &:hover {
+    	@include opacity(0.8);
+    }
+}
+.btn--submit,
+.btn--cancel,
+.btn--clean,
+.btn--grey,
+%btn--action {
+    @extend .btn;
+}
+.btn--submit {
+    background: $primary-color;
+    color: #212021;
+    @extend %f-bold;
+}
+
+.btn--cancel {
+    background: $red-color;
+    color: #fff;
+}
+
+.btn--clean {
+    background: transparent;
+    color: #fff;
+    @include vendor(border-radius, 0);
+
+    &:hover {
+        @include opacity(10);
+        text-decoration: underline;
+    }
+}
+
+.btn--grey {
+    background: #3C3C3C;
+    color: #fff;
+}
+
+//Just a model
+%btn--action {
+    padding: 0.7em 1em;
+    width: auto;
+    text-indent: -999em;
+    background: #3C3C3C;
+    &:before {
+        content: '';
+        display: block;
+    }
+}
+
+.btn--download {
+    @extend %btn--action;
+    &:before {
+        @extend .icons-icon-download;
+    }
+}
+
+.btn--move {
+    @extend %btn--action;
+    &:before {
+        @extend .icons-icon-external-white;
+    }
+}
+
+.btn--delete {
+    background: $red-color;
+    @extend %btn--action;
+    &:before {
+        @extend .icons-icon-delete-white;
+    }
+}

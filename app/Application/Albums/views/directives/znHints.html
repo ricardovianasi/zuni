@@ -1,0 +1,13 @@
+<div class="tags__autocomplete" ng-show="showHints">
+    <ul style="position: relative" inview-container>
+        <li
+            ng-repeat="hintValue in filtered_hints = (hints | filter: hints_filter)"
+            ng-click="chooseHint(hintValue.name)"
+            class="js-hint-item"
+            in-view="hintInview(hintValue, $inview)"
+            inview-options="inviewOptions"
+            ng-class="{ active: hintValue.active }">
+            {{ hintValue.name }}
+        </li>
+    </ul>
+</div>

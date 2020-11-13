@@ -1,0 +1,136 @@
+.adjust-container {
+	height: 93.4%;
+	.container {
+		height: 100%;
+	}
+}
+.zoom-out-cursor {
+	cursor: zoom-out;
+}
+.zoom-in-cursor {
+	cursor: zoom-in;
+}
+.image__details {
+	position: relative;
+	height: 100%;
+	padding: 2em;
+	@include grid(12);
+	.image__bx {
+		position: relative;
+		height: 100%;
+		@include grid(8);
+
+		@include breakpoint(up-to-xs) {
+			@include grid(12);
+			float: right;
+			height: auto;
+		}
+
+		img {
+			margin: 0 auto;
+			max-height: 100%;
+		}
+	}
+	.info__bx {
+		position: relative;
+		@include grid(4);
+
+		@include breakpoint(up-to-xs) {
+			margin-top: 4em;
+			@include grid(12);
+		}
+
+		.description,
+		.location {
+			@extend %f15;
+		}
+
+		.description {
+			color: #fff;
+			margin: 1em 0;
+			line-height: 1.6em;
+		}
+
+		.owner {
+			color: #fff;
+			margin: .5em 0 .3em;
+			font-size: 14px;
+		}
+
+		time {
+			display: block;
+			color: $primary-color;
+			@extend %f35;
+		}
+
+		.location {
+			color: $red-color;
+			margin: 2em 0 0 0;
+			display: block;
+
+			&:before {
+				content: "";
+				display: block;
+				float: left;
+				margin: -0.3em 0.5em 0 0;
+				@extend .icons-icon-local;
+			}
+		}
+
+		.tags__bx {
+			margin: 2em 0;
+			padding: 2em 0;
+			border-top: 1px solid #A3A3A3;
+			border-bottom: 1px solid #A3A3A3;			
+			@extend .cf;
+		}
+	}
+
+	.back__link {
+		position: absolute;
+		right: 2em;
+		bottom: 4em;
+		width: auto;
+		color: #323232;
+		text-transform: none;
+		@extend %f14;
+	}
+
+	.download__link {
+		background-color: $primary-color;
+		position: absolute;
+		right: 4em;
+		bottom: 2em;
+		text-indent: -999em;
+		padding: 0.1em 1em 1em;
+		@include vendor(border-radius, 0.5em);
+		&:after {
+			content: "";
+			display: block;
+			@extend .icons-icon-download-white;
+		}
+	}
+
+	.edit__button {
+		background: $primary-color;
+        display: block;
+        text-indent: -999em;
+        border: none;
+        padding: 0.6em;
+        width: auto;
+        position: absolute;
+        right: 0;
+        top: 5px;
+        @include vendor(border-radius, 0);
+        @include vendor(box-shadow, none);
+        &:before {
+            content: "";
+            display: block;
+            float: left;
+            @extend .icons-icon-editar;
+        }
+        &:hover {
+            background: #ACBB76;
+        }
+	}
+}

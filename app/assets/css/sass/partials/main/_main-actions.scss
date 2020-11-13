@@ -1,0 +1,51 @@
+.albums__actions {
+    margin-top: 3em;
+    @include grid(12);
+    .actions__left, .actions__right {} .actions__left {
+        float: left;
+    }
+    .actions__right {
+        float: right;
+        .btn--clean {
+            color: $primary-color;
+        }
+        button, a {
+            float: right;
+        }
+    }
+}
+.select__actions, .select__actions--active {
+    @extend .cf;
+    button, a {
+        width: auto;
+        float: left;
+        text-transform: capitalize;
+        @extend %f14;
+    }
+}
+
+.main__actions {
+    position: fixed;
+    z-index: 20;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: $primary-color;
+    padding: 1.5em;
+    @extend .cf;
+    .action {
+        width: auto;
+    }
+    button, a {
+        margin-right: 1em;
+        &:first-child {
+            margin-right: 0;
+        }
+    }
+    .action--right {
+        float: right;
+    }
+    .action--left {
+        float: left;
+    }
+}

@@ -1,0 +1,24 @@
+<div class="tags__list tags__list--field"
+     ng-class="{'tags__list--fixed': fixed, 'tags__list--disabled': config.disabled}" ng-click="TAG.tagFieldFocus();">
+    <div class="tags__list__content" ng-class="{open: openBox}">
+        <div class="tags__list__content__item" ng-repeat="tag in tagsArray track by tag.id">
+            <button type="button" class="remove" ng-click="TAG.remove(tag, $index);"
+                    ng-hide="config.disabled === true"></button>
+            <span>{{ tag[config.prefix || 'tag'] }}</span>
+        </div>
+        <div class="tags__create" ng-hide="config.disabled === true">
+            <input type="text" class="js-tags-field" ng-model="tgValue" placeholder="{{config.name || 'Tags:'}}"
+                   TabIndex="3">
+        </div>
+    </div>
+    <div class="tags__autocomplete" ng-if="hintShow">
+        <ul>
+            <li ng-repeat="hintValue in tagsHint | filter: tgValue" ng-click="TAG.create(hintValue, false);"
+                class="js-hint-item">{{ hintValue[config.prefix || 'tag'] }}
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--Input that contains all tag values-->
+<input type="hidden" name="tags" class="js-tags-values" value="">

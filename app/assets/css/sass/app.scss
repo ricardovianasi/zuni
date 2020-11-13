@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+/*------------------------------------*\
+    #PROJECT-SETTINGS
+\*------------------------------------*/
+
+@import "settings/colors";
+@import "settings/width";
+
+/*------------------------------------*\
+    #PROJECT-TOOLS
+\*------------------------------------*/
+
+@import "tools/mixins";
+
+
+
+/*------------------------------------*\
+    #PROJECT-VENDORS
+\*------------------------------------*/
+
+@import "vendors/custom-gs";
+@import "vendors/bootstrap-grid";
+
+/*------------------------------------*\
+    #PROJECT-BASE
+\*------------------------------------*/
+
+@import "base/reset";
+@import "base/structure";
+@import "base/typograph";
+@import "base/forms";
+@import "base/clearfix";
+
+/*------------------------------------*\
+    #PROJECT-COMPONENTS
+\*------------------------------------*/
+
+/*------------------------------------*\
+    #PROJECT-OBJECTS
+\*------------------------------------*/
+
+@import "objects/buttons";
+@import "objects/tags";
+@import "objects/dialog";
+@import "objects/select";
+@import "objects/privacity";
+@import "objects/loading";
+@import "objects/scroll";
+<<<<<<< HEAD
+=======
+@import "objects/pagination";
+>>>>>>> develop
+@import "objects/messages";
+
+/*------------------------------------*\
+    #PROJECT-GENERIC
+\*------------------------------------*/
+
+@import "generic/backgrounds";
+@import "generic/errors";
+@import "generic/success";
+@import "generic/sprite";
+
+/*------------------------------------*\
+    #PROJECT-PARTIALS
+\*------------------------------------*/
+
+/*HEADER*/
+
+@import "partials/header/header";
+
+/*MAIN*/
+
+@import "partials/main/authentication";
+@import "partials/main/main-actions";
+@import "partials/main/albums";
+@import "partials/main/albums-details";
+@import "partials/main/image-details";
+@import "partials/main/move";
+@import "partials/main/search";
+@import "partials/main/upload";
+
+/*USER*/
+
+@import "partials/main/user";
+@import "partials/main/user_manager";
+//@import "partials/main/user_profiles";
+//@import "partials/main/user_metadata";
+
+/*FOOTER*/

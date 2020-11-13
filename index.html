@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-ng-app="ZN" ng-strict-di>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+<<<<<<< HEAD
+    <base href="/">
+
+=======
+>>>>>>> develop
+    <title>Zuni</title>
+
+    <link rel="stylesheet" href="app/assets/css/compiled/app.css">
+    <link rel="stylesheet" href="app/assets/css/select.css">
+</head>
+
+<body ng-controller="MasterController as main">
+    <div class="wrapper" ng-view></div>
+
+    <!--Loading -->
+    <zn-loading action="isLoading"></zn-loading>
+
+    <!-- CORE JS FILES -->
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+    <script src="app/assets/js/vendors/angular.min.js"></script>
+    <script src="app/assets/js/vendors/angular-route.min.js"></script>
+    <script src="app/assets/js/vendors/angular-cookies.min.js"></script>
+    <script src="app/assets/js/vendors/angular-sanitize.min.js"></script>
+    <script src="app/assets/js/vendors/angular-file-upload.min.js"></script>
+    <script src="app/assets/js/vendors/angular-inview.js"></script>
+<<<<<<< HEAD
+=======
+    <script src="app/assets/js/vendors/dirPagination.js"></script>
+>>>>>>> develop
+    <script src="app/assets/js/vendors/select.js"></script>
+    <script src="app/assets/js/vendors/angucomplete-alt.min.js"></script>
+
+    <!--MAIN FILE-->
+    <script src="app/Application/zn.module.js"></script>
+
+    <!--CORE-->
+    <script src="app/Application/core/core.module.js"></script>
+    <script src="app/Application/core/constants.js"></script>
+    <script src="app/Application/core/route-config.js"></script>
+
+    <!--MASTER-->
+    <script src="app/Application/Main/master.module.js"></script>
+    <script src="app/Application/Main/controller/master.js"></script>
+    <script src="app/Application/Main/service/serialize.js"></script>
+    <script src="app/Application/Main/service/helper.js"></script>
+    <script src="app/Application/Main/service/interceptor.js"></script>
+    <script src="app/Application/Main/service/crop-image.js"></script>
+    <script src="app/Application/Main/directive/znHeader.js"></script>
+    <script src="app/Application/Main/directive/znModal.js"></script>
+    <script src="app/Application/Main/directive/znDateMask.js"></script>
+    <script src="app/Application/Main/directive/znLoading.js"></script>
+    <script src="app/Application/Main/directive/znMessage.js"></script>
+    <script src="app/Application/Main/directive/znScroll.js"></script>
+    <script src="app/Application/Main/modules/tags.module.js"></script>
+
+    <!--AUTHENTICATION-->
+    <script src="app/Application/Authentication/auth.module.js"></script>
+    <script src="app/Application/Authentication/controller/auth.js"></script>
+    <script src="app/Application/Authentication/controller/recover-password.js"></script>
+    <script src="app/Application/Authentication/service/auth.js"></script>
+    <script src="app/Application/Authentication/service/recover-password.js"></script>
+    <script src="app/Application/Authentication/service/session.js"></script>
+
+    <!--ALBUMS-->
+    <script src="app/Application/Albums/albums.module.js"></script>
+    <script src="app/Application/Albums/controller/albums.js"></script>
+    <script src="app/Application/Albums/controller/album-detail.js"></script>
+    <script src="app/Application/Albums/controller/photo-detail.js"></script>
+    <script src="app/Application/Albums/controller/album-edit.js"></script>
+    <script src="app/Application/Albums/services/get-hints.js"></script>
+    <script src="app/Application/Albums/services/get-albums.js"></script>
+    <script src="app/Application/Albums/services/delete-image.js"></script>
+    <script src="app/Application/Albums/services/put-image.js"></script>
+    <script src="app/Application/Albums/services/put-album.js"></script>
+    <script src="app/Application/Albums/services/get-album.js"></script>
+    <script src="app/Application/Albums/services/get-image.js"></script>
+    <script src="app/Application/Albums/services/post-album.js"></script>
+    <script src="app/Application/Albums/services/upload-helper.js"></script>
+    <script src="app/Application/Albums/services/edit-helper.js"></script>
+    <script src="app/Application/Albums/services/delete-album.js"></script>
+    <script src="app/Application/Albums/services/move-image.js"></script>
+    <script src="app/Application/Albums/services/copy-image.js"></script>
+    <script src="app/Application/Albums/services/download.js"></script>
+    <script src="app/Application/Albums/services/get-tags.js"></script>
+    <script src="app/Application/Albums/directive/znSelect.js"></script>
+    <script src="app/Application/Albums/directive/znActions.js"></script>
+    <script src="app/Application/Albums/directive/znTags.js"></script>
+    <script src="app/Application/Albums/directive/znDelete.js"></script>
+    <script src="app/Application/Albums/directive/znDeleteAlbum.js"></script>
+    <script src="app/Application/Albums/directive/znMove.js"></script>
+    <script src="app/Application/Albums/directive/znCopy.js"></script>
+    <script src="app/Application/Albums/directive/znUpdateAlbum.js"></script>
+    <script src="app/Application/Albums/directive/znEditImage.js"></script>
+    <script src="app/Application/Albums/directive/znDownload.js"></script>
+    <script src="app/Application/Albums/directive/znThumb.js"></script>
+    <script src="app/Application/Albums/directive/znAddPhoto.js"></script>
+    <script src="app/Application/Albums/directive/znUpload.js"></script>
+    <script src="app/Application/Albums/directive/znUploadPhoto.js"></script>
+    <script src="app/Application/Albums/directive/znSelectPrivacity.js"></script>
+    <script src="app/Application/Albums/directive/znUploadContent.js"></script>
+    <script src="app/Application/Albums/directive/znZoom.js"></script>
+
+    <!--SEARCH-->
+    <script src="app/Application/Search/search.module.js"></script>
+    <script src="app/Application/Search/controller/search.js"></script>
+    <script src="app/Application/Search/service/search.js"></script>
+    <script src="app/Application/Search/directive/znSearch.js"></script>
+
+    <!--USER-->
+    <script src="app/Application/User/user.module.js"></script>
+    <script src="app/Application/User/services/get-users.js"></script>
+    <script src="app/Application/User/services/get-user.js"></script>
+    <script src="app/Application/User/services/get-groups.js"></script>
+    <script src="app/Application/User/services/get-profiles.js"></script>
+    <script src="app/Application/User/services/change-password.js"></script>
+    <script src="app/Application/User/services/post-user.js"></script>
+    <script src="app/Application/User/services/post-group.js"></script>
+    <script src="app/Application/User/services/delete-group.js"></script>
+    <script src="app/Application/User/controller/user.js"></script>
+    <script src="app/Application/User/controller/profiles.js"></script>
+    <script src="app/Application/User/controller/user-manager.js"></script>
+    <script src="app/Application/User/directive/znChangePicture.js"></script>
+    <script src="app/Application/User/directive/znChangePassword.js"></script>
+    <script src="app/Application/User/directive/znNewUser.js"></script>
+    <script src="app/Application/User/directive/znNewGroup.js"></script>
+    <script src="app/Application/User/directive/znDeleteGroup.js"></script>
+
+    <!--SCROLL-->
+    <zn-scroll></zn-scroll>
+</body>
+</html>

@@ -1,0 +1,14 @@
+/*------------------------------------*\
+    #BACKGROUNDS
+\*------------------------------------*/
+
+.bg--full {
+	@include vendor(background-size, cover);
+}
+
+.bg--home {
+	background: url('../../../assets/imgs/backgrounds/bg-home.jpg') no-repeat center center fixed;
+}
+
+
+  

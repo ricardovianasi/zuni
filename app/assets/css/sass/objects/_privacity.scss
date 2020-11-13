@@ -1,0 +1,130 @@
+.privacity__view {
+    display: inline-block;
+    text-indent: -999em;
+    float: right;
+    &:after {
+        content: "";
+        display: block;
+    }
+}
+.privacity__view.public {
+    &:after {
+        @extend .icons-icon-public-white;
+    }
+}
+.privacity__view.private {
+    &:after {
+        @extend .icons-icon-private-white;
+    }
+}
+.privacity__select {
+    display: inline-block;
+    background: $primary-color;
+    position: relative;
+    @include vendor(border-radius, 0.5em);
+    .privacity__select__button {
+        position: relative;
+        cursor: pointer;
+        padding: 1em 3em 1em 1em;
+        @extend .cf;
+    }
+    .privacity__option {
+        display: inline-block;
+        float: left;
+        padding-right: 1em;
+        margin-right: 1em;
+        border-right: 1px solid #000;
+        @extend %f13;
+        &:before {
+            content: '';
+            display: block;
+            float: left;
+            margin-right: 0.8em;
+        }
+    }
+    .privacity__option--public:before {
+        @extend .icons-icon-public-black;
+    }
+
+    .privacity__option--private:before {
+        @extend .icons-icon-private-black;
+    }
+    .select-privacity {
+        position: absolute;
+        top: 13px;
+        right: 1em;
+        width: auto;
+        border: none;
+        background: none;
+        padding: 0;
+        border-style: solid;
+        border-width: 8px;
+        border-color: #000 transparent transparent transparent;
+        cursor: pointer;
+        @include vendor(border-radius, 0);
+    }
+    
+    .privacity__options {
+    	display: none;
+    	position: absolute;
+        list-style: none;
+        background: $primary-color;
+        width: 150px;
+		right: 0;
+        margin: 0;
+        z-index: 100;
+        overflow: hidden;
+        @include vendor(box-shadow, 0 1px 2px #444);
+        li {
+			border-top: 1px solid #6F7B4E;
+        	@extend %f13;
+        	@extend %f-regular;
+        	@extend .cf;
+            &:hover {
+            	background: #C4D595;
+            }
+        }
+        button {
+        	padding: 0.8em 1em;
+        	border: 0;
+        	background: none;
+        	width: auto;
+        	display: inline-block;
+        	cursor: pointer;
+
+        	&:before {
+                content: '';
+                display: inline-block;
+                float: left;
+                margin-right: 0.7em;
+            }
+        }
+        li:first-child {
+        	border-top: 0;
+        	margin-top: 0;
+        }
+    }
+}
+
+.privacity__select--right {
+    float: right;
+}
+
+.privacity__select--left {
+    float: left;
+}
+
+.privacity__select.active {
+	@include vendor(border-bottom-right-radius, 0);
+	@include vendor(border-bottom-left-radius, 0);
+	.select-privacity {
+        top: 5px;
+        border-color: transparent transparent #000 transparent;
+    }
+    .privacity__options {
+    	display: block;
+    	@include vendor(border-bottom-right-radius, 0.5em);
+    	@include vendor(border-top-left-radius, 0.5em);
+		@include vendor(border-bottom-left-radius, 0.5em);
+    }
+}

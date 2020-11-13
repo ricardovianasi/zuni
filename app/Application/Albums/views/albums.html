@@ -1,0 +1,93 @@
+<!-- Application Header -->
+<zn-header user="currentUser"></zn-header>
+<!-- End Application Header -->
+
+<!-- Application Content -->
+<main>
+    <div class="container">
+        <div zn-select class="albums">
+            <div class="albums__list">
+                <div class="albums__list__bx">
+                    <div class="album album--add js-add-photo" ng-if="isAuthorized('album', 'create') && !isMobile">
+                        <div zn-add-photo zn-upload class="album__bx">
+                            <button class="add-new-album" ng-click="addPhotoModal();">Incluir Fotos</button>
+                            <zn-modal class="zuni-dialog zuni-dialog--clean"
+                                      ng-class="{'zuni-dialog--open': openModal}">
+                                <div class="zuni-dialog__content__header" ng-if="!readyUpload">
+                                    <span class="title">Adicionar novas fotos:</span>
+                                    <button class="close" ng-click="cancelUpload($event);">Fechar</button>
+                                </div>
+                                <div class="upload__ready" ng-if="readyUpload">
+                                    <span class="title">Preparando upload...</span>
+                                    <div class="upload__ready__bx">
+                                        <span class="progress" ng-style="{ 'width': progress + '%' }"></span>
+                                    </div>
+                                </div>
+                                <div class="upload__actions" ng-if="!readyUpload">
+                                    <button class="btn--submit" ng-click="selectPhotos();">Criar novo album</button>
+                                    <div class="grafism-delimiter">
+                                        <span>Ou</span>
+                                    </div>
+                                    <span class="title">Escolha um album existente</span>
+                                    <div class="select--albums">
+                                        <button class="btn--submit action-button js-select-album"
+                                                ng-click="openSelectAlbum();" ng-class="{active: getAlbumList}">
+                                            Selecione um album
+                                        </button>
+                                        <div class="select-list select-list--filter" ng-if="getAlbumList === true">
+                                            <input type="text" ng-model="albumName" placeholder="Procurar por:">
+                                            <ul ng-if="getAlbumList === true">
+                                                <li ng-repeat="album in vm.albums | filter: albumName"
+                                                    ng-click="getThisAlbum(album);">{{ album.name }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <input type="file" nv-file-select="" uploader="uploader" multiple="multiple"
+                                               accept="image/*">
+                                    </div>
+                                </div>
+                            </zn-modal>
+                            <zn-modal class="zuni-dialog zuni-dialog--large"
+                                      ng-class="{'zuni-dialog--open': openCreate}">
+                                <zn-upload-content upload="uploadItens" content="hasAlbum"
+                                                   groups="userGroups"></zn-upload-content>
+                            </zn-modal>
+                        </div>
+                    </div>
+                    <div class="album js-album-item"
+                         ng-repeat="album in ::vm.albums | orderBy:'id':true track by ::album.id">
+                        <div class="album__bx" ng-class="
+                            {
+                                'album__bx--public': album.visibility === 'public',
+                                'album__bx--private': album.visibility === 'private',
+                                'album__bx--share': album.visibility === 'share'
+                            }">
+
+                            <a ng-href="#/albums/{{ ::album.id }}" title="{{ ::album.name }}" class="album__link">
+                                <div class="album__image">
+                                    <img ng-src="{{ ::album.cover }}" alt="{{ ::album.name }}">
+                                </div>
+                                <div class="album__info">
+                                    <span class="name">{{ ::album.name }}</span>
+                                    <span class="count">{{ ::album.image_count }} fotos</span>
+                                </div>
+                            </a>
+                            <div class="album__actions" ng-if="onSelect" ng-click="selectThisIten($event)">
+                                <input type="checkbox" name="" id="{{::album.id}}" class="radio-item js-check"
+                                       ng-checked="allSelected">
+                                <label class="radio-label" name="check"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- End Application Content -->
+
+<!-- Application Footer -->
+<footer>
+
+</footer>
+<!-- End Application Footer -->

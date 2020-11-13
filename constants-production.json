@@ -1,0 +1,11 @@
+{
+  "BASE": {
+<<<<<<< HEAD
+    "url": "http://150.164.80.212:6969",
+    "path": "http://150.164.80.212/ufmg-zuni/application/"
+=======
+    "url": "http://159.164.180.61:6969",
+    "path": "http://159.164.180.61/ufmg-zuni/application/"
+>>>>>>> develop
+  }
+}

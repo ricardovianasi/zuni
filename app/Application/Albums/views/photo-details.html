@@ -1,0 +1,52 @@
+<!-- Application Header -->
+<zn-header filter="true" user="currentUser"></zn-header>
+<!-- End Application Header -->
+
+<!-- Application Content -->
+<main class="adjust-container">
+    <div class="container">
+        <!-- image__details .image__bx:hover {
+          cursor: zoom-in;
+        } -->
+        <div class="image__details" ng-if="photo">
+            <div class="image__bx">
+                <img ng-src="{{ photo.thumbnail_url }}" alt="{{ photo.description }}">
+                <a ng-href="{{ photo.thumbnail_url }}" download="{{ photo.thumbnail_url }}" class="download__link"
+                   title="Download da foto">Download</a>
+            </div>
+            <div class="info__bx">
+                <div class="info">
+                    <time datatime="{{ photo.formatted_date }}" ng-if="photo.formatted_date">{{ photo.formatted_date
+                        }}
+                    </time>
+                    <h1 class="description" ng-if="photo.description">{{ photo.description }}</h1>
+                    <span class="owner">
+                        <em>{{ photo.owner.name }}</em>
+                    </span>
+                    <span class="location" ng-if="photo.location">{{ photo.location.name }}</span>
+
+                    <div class="tags__bx" ng-if="photo.tags.length > 0">
+                        <ul class="tags__list tags__list--left">
+                            <li class="tags__list__content__item" ng-repeat="tags in ::photo.tags track by tags.id">
+                                <a ng-href="#/search/{{ tags.tag }}">
+                                    <span>{{ tags.tag }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="edit__info">
+                    <zn-actions></zn-actions>
+                </div>
+            </div>
+            <a ng-href="#/albums/{{ photo.album.id }}" class="btn--submit back__link">Ir para o Álbum</a>
+        </div>
+    </div>
+</main>
+<!-- End Application Content -->
+
+<!-- Application Footer -->
+<footer>
+
+</footer>
+<!-- End Application Footer -->

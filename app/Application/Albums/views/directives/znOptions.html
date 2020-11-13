@@ -1,0 +1,166 @@
+<!--Edit-->
+<div class="album__actions--edit">
+    <button class="edit-button" ng-class="{active: showOptions}" ng-click="openEdit($event);"></button>
+</div>
+
+<!--Edit Options-->
+<div class="album__actions--edit-options" ng-if="showOptions === true">
+    <ul>
+        <li>
+            <button ng-click="edit(photo.id);">Editar Dados</button>
+        </li>
+        <li>
+            <button ng-click="move(photo.id);">Mover</button>
+        </li>
+        <li>
+            <button ng-click="copy(photo.id);">Copiar</button>
+        </li>
+        <li>
+            <button ng-click="delete(photo.id);">Excluir</button>
+        </li>
+    </ul>
+</div>
+
+<!-- Edit form modal -->
+<zn-modal class="zuni-dialog js-edit-dialog-{{photo.id}}">
+    <div zn-edit-image>
+        <div class="zuni-dialog__content__header">
+            <span class="title">Editar foto:</span>
+        </div>
+        <form>
+            <fieldset>
+                <label class="dual">
+                    <input zn-date-mask type="text" ng-model="photo.formatted_date" placeholder="__/__/____" required
+                           maxlength="10" TabIndex="1" ng-disabled="photo.noDate"/>
+                </label>
+                <label for="no-date" class="dual">
+                    <span class="check-button">
+                        <input type="checkbox" ng-model="photo.noDate"
+                               ng-init="photo.noDate = (photo.formatted_date ? false : true)">
+                        <span>Sem data</span>
+                    </span>
+                </label>
+                <label class="location-field">
+                    <angucomplete-alt
+                        id="photo_edit_location"
+                        placeholder="Endereço da Foto"
+                        selected-object="photo.location"
+                        local-data="$parent.LocationHints"
+                        search-fields="name"
+                        title-field="name"
+                        initial-value="{{photo.location.name || ''}}"
+                        input-class="selectize-input location-field"
+                        override-suggestions="true">
+
+                </label>
+
+                <label class="location-author">
+                    <angucomplete-alt
+                        id="photo_edit_owner"
+                        placeholder="Autor da Foto"
+                        selected-object="photo.owner"
+                        local-data="$parent.AuthorHints"
+                        search-fields="name"
+                        title-field="name"
+                        initial-value="{{photo.owner.name || ''}}"
+                        input-class="selectize-input"
+                        override-suggestions="true">
+                </label>
+                <label>
+                    <ui-select multiple tagging="tagTransform" tagging-label="false" tagging-tokens=","
+                               ng-model="photo.tags" theme="select2" ng-disabled="disabled">
+                        <ui-select-match placeholder="Tags:">{{ $item.tag ? $item.tag : $item.name }}</ui-select-match>
+                        <ui-select-choices repeat="tag in $parent.TagsHints | filter:$select.search">
+                            {{ tag.tag ? tag.tag : tag.name }}
+                        </ui-select-choices>
+                    </ui-select>
+
+                </label>
+                <label>
+                    <textarea name="" id="" cols="30" rows="5" ng-model="photo.description" TabIndex="4"></textarea>
+                </label>
+            </fieldset>
+        </form>
+
+
+        <div class="action__row">
+            <button class="btn--submit" ng-click="confirmEdit(photo.album.id, photo);" TabIndex="5">Editar</button>
+            <button class="btn--clean" ng-click="cancel(photo);">Cancelar</button>
+        </div>
+    </div>
+</zn-modal>
+
+<!-- Delete modal -->
+<zn-modal class="zuni-dialog js-delete-dialog-{{photo.id}}">
+    <div zn-delete>
+        <div class="zuni-dialog__content__header">
+            <span class="title">Deseja realmente excluir as fotos selecionadas?</span>
+        </div>
+        <div class="action__row">
+            <button class="btn--cancel"
+                    ng-click="confirmDelete({list: vm.detail.photos, imageID: photo.id, index: $index, albumID: photo.album.id, type: 'single'});">
+                Excluir
+            </button>
+            <button class="btn--clean" ng-click="cancel();">Cancelar</button>
+        </div>
+    </div>
+</zn-modal>
+
+<!-- Move modal -->
+<zn-modal class="zuni-dialog js-move-dialog-{{photo.id}}">
+    <div zn-move>
+        <div class="zuni-dialog__content__header">
+            <span class="title">Mover foto:</span>
+        </div>
+        <div class="move__cotent">
+            <div class="move__bx">
+                <span class="title">Mover de:</span>
+                <span class="move-from">{{ AlbumDetail.album.name || photo.album.name }}</span>
+            </div>
+            <div class="move__bx">
+                <span class="title">Para:</span>
+                <div class="select select--zuni">
+                    <button ng-class="{active: open}" ng-click="openSelect();">{{ name }}</button>
+                    <ul class="select__list">
+                        <li ng-repeat="album in albumsToMove track by album.id"
+                            ng-click="getName(album.id, album.name);">{{ album.name }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="action__row">
+            <button class="btn--submit"
+                    ng-click="confirmMove({imageID: photo.id, list: vm.detail.photos, albumID: photo.album.id, type:'single'});">
+                Mover
+            </button>
+            <button class="btn--clean" ng-click="cancel();">Cancelar</button>
+        </div>
+    </div>
+</zn-modal>
+
+<!-- Copy modal -->
+<zn-modal class="zuni-dialog js-copy-dialog-{{photo.id}}">
+    <div zn-copy>
+        <div class="zuni-dialog__content__header">
+            <span class="title">Copiar foto:</span>
+        </div>
+        <div class="move__cotent">
+            <div class="move__bx">
+                <span class="title">Copiar foro para:</span>
+                <div class="select select--zuni">
+                    <button ng-class="{active: open}" ng-click="openSelect();">{{ name }}</button>
+                    <ul class="select__list">
+                        <li ng-repeat="album in albumsToMove track by album.id"
+                            ng-click="getName(album.id, album.name);">{{ album.name }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="action__row">
+            <button class="btn--submit" ng-click="copy(photo.id, photo.album.id);">Copiar</button>
+            <button class="btn--clean" ng-click="cancel();">Cancelar</button>
+        </div>
+    </div>
+</zn-modal>

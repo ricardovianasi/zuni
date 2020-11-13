@@ -1,0 +1,288 @@
+<!-- Application Header -->
+<zn-header></zn-header>
+<!-- End Application Header -->
+
+<!-- Application Content -->
+<main>
+    <div class="container">
+        <div class="albums__actions albums__actions--details">
+            <div class="actions__left">
+                <div class="js-select-actions">
+                    <a ng-href="#/albums/" class="btn--cancel all-album">Voltar para os álbuns</a>
+                </div>
+            </div>
+        </div>
+        <section zn-new-user class="user__data user__data--manager">
+            <h2 class="title">Usuários</h2>
+
+            <div class="user__data__header">
+                <div class="header__left">
+                    <form action="">
+                        <input type="text" ng-model="uFilter" placeholder="Pesquisar usuarios">
+                    </form>
+                </div>
+                <div class="header__right">
+                    <button class="btn--submit" ng-click="openUserModal();">Novo usuário</button>
+                </div>
+            </div>
+
+            <div class="user__data__list user__data__list--1-5">
+                <div class="table-list table-list--fixed">
+                    <div class="table-list__container">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>
+                                    <div class="th-inner">
+                                        <button class="filter" ng-click="vm.order('user', vm.user, 'name', $event)">
+                                            Nome
+                                        </button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="th-inner">
+                                        <button class="filter" ng-click="vm.order('user', vm.user, 'origin', $event)">
+                                            Origem
+                                        </button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="th-inner">
+                                        <button class="filter"
+                                                ng-click="vm.order('user', vm.user, 'profiles[0].name', $event)">Perfil
+                                        </button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="th-inner">
+                                        <button class="filter" ng-click="vm.order('user', vm.user, 'status', $event)">
+                                            Status
+                                        </button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="th-inner">
+                                        <button>Ações</button>
+                                    </div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="user in vm.user | filter:uFilter">
+                                <td>{{ ::user.name }}</td>
+                                <td>{{ ::user.origin || 'Não possui origem'}}</td>
+                                <td>{{ ::vm.formatProfiles(user.profiles) || 'Não possui perfil'}}</td>
+                                <td>{{ (user.status) ? 'Ativo': 'Inativo' }}</td>
+                                <td>
+                                    <button class="edit-button"></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New User modal -->
+            <zn-modal class="zuni-dialog zuni-dialog--medium zuni-dialog--clean"
+                      ng-class="{'zuni-dialog--open': userModal}">
+                <div class="zuni-dialog__content__header">
+                    <span class="title title--full">Cadastrar novo usuario:</span>
+                    <p class="subtitle">* O Usuário pode estar em 1 ou mais grupos e possuir 1 ou mais perfis</p>
+                </div>
+                <form action="">
+                    <div class="form-wrapper form-wrapper--full">
+                        <label for="name" class="label">Foto:</label>
+                        <div zn-change-picture class="user__image__profile">
+                            <button type="button" class="add-image">Add foto</button>
+
+                            <!--Input file-->
+                            <input type="file" style="display: none;">
+                        </div>
+                    </div>
+                    <div class="form-wrapper form-wrapper--compress form-wrapper--dual">
+                        <label for="name" class="label">Nome:</label>
+                        <input type="text" class="input" ng-model="newUser.name" placeholder="Nome do usuário"
+                               TabIndex="1"/>
+                    </div>
+
+                    <div class="form-wrapper form-wrapper--compress form-wrapper--dual">
+                        <label for="" class="label">Grupos:</label>
+                        <!--TAGS COMPONENT-->
+                        <zn-tags tags-array="[]" config="{
+                            name: 'Add group:',
+                            hint: 'groups',
+                            prefix: 'name',
+                            namespace: 'AddUserGroups',
+                            ID: 0
+                        }" class="input input--tags"></zn-tags>
+                        <!--END TAGS COMPONENT-->
+                    </div>
+
+                    <div class="form-wrapper form-wrapper--compress form-wrapper--dual">
+                        <label for="mail" class="label">Email:</label>
+                        <input type="text" class="input" name="mail" ng-model="newUser.email"
+                               placeholder="E-mail do usuário" TabIndex="3"/>
+                    </div>
+
+                    <div class="form-wrapper form-wrapper--compress form-wrapper--dual">
+                        <label for="origin" class="label">Origem:</label>
+                        <input type="text" class="input" name="origin" ng-model="newUser.origin"
+                               placeholder="Origem do usuário" TabIndex="4"/>
+                    </div>
+
+                    <div class="form-wrapper form-wrapper--compress form-wrapper--dual">
+                        <label for="tel" class="label">Telefone:</label>
+                        <input type="text" class="input" name="tel" ng-model="newUser.phone"
+                               placeholder="Telefone do usuário" TabIndex="5"/>
+                    </div>
+
+                    <div class="form-wrapper form-wrapper--compress form-wrapper--dual">
+                        <label for="expire" class="label">Data de expiração:</label>
+                        <input zn-date-mask type="text" class="input" name="expire" ng-model="newUser.expires_at"
+                               placeholder="Data de expiração" TabIndex="6"/>
+                    </div>
+
+                    <div class="form-wrapper form-wrapper--compress form-wrapper--dual">
+                        <label for="expire" class="label">Perfil:</label>
+                        <zn-tags tags-array="[]" config="{
+                            name: 'Add perfil:',
+                            hint: 'profiles',
+                            prefix: 'name',
+                            namespace: 'AddUserPerfil',
+                            ID: 1,
+                            input: false
+                        }" class="input input--tags"></zn-tags>
+                    </div>
+
+                    <div class="form-wrapper action__row">
+                        <button type="button" class="btn--submit" ng-click="addUser();">Cadastrar</button>
+                        <button type="button" class="btn--cancel" ng-click="cancel();">Cancelar</button>
+                    </div>
+                </form>
+            </zn-modal>
+        </section>
+        <section zn-new-group zn-delete-group class="user__data user__data--manager">
+            <h2 class="title">Grupos</h2>
+
+            <div class="user__data__header">
+                <div class="header__left">
+                    <form action="">
+                        <input type="text" ng-model="uGroups" placeholder="Pesquisar grupos">
+                    </form>
+                </div>
+                <div class="header__right">
+                    <button class="btn--submit" ng-click="openGroupModal();">Novo grupo</button>
+                </div>
+            </div>
+
+            <div class="user__data__list user__data__list--1-5">
+                <div class="table-list table-list--fixed">
+                    <div class="table-list__container">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>
+                                    <div class="th-inner">
+                                        <button class="filter" ng-click="vm.order('groups', vm.groups, 'name', $event)">
+                                            Grupo
+                                        </button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="th-inner">
+                                        <button class="filter"
+                                                ng-click="vm.order('groups', vm.groups, 'description', $event)">
+                                            Descrição
+                                        </button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="th-inner">
+                                        <button class="filter"
+                                                ng-click="vm.order('groups', vm.groups, 'profiles[0].name', $event)">
+                                            Usuários
+                                        </button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="th-inner">
+                                        <button>Ações</button>
+                                    </div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="group in vm.groups | filter:uGroups">
+                                <td>{{ ::group.name }}</td>
+                                <td>{{ ::group.description || 'Não possui descrição'}}</td>
+                                <td>{{ ::vm.formatUsers(group.name) || 'Não possui usuários' }}</td>
+                                <td class="action">
+                                    <button class="edit-button"></button>
+                                    <button class="remove-button" ng-click="openDeleteGroupModal(group.id);"></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- New Group modal -->
+            <zn-modal class="zuni-dialog zuni-dialog--clean" ng-class="{'zuni-dialog--open': groupModal}">
+                <div class="zuni-dialog__content__header">
+                    <span class="title title--full">Cadastrar novo grupo:</span>
+                </div>
+                <form action="">
+                    <div class="form-wrapper form-wrapper--compress">
+                        <label for="name" class="label">Nome:</label>
+                        <input type="text" class="input" ng-model="newGroup.name" placeholder="Nome do grupo"
+                               TabIndex="1"/>
+                    </div>
+
+                    <div class="form-wrapper form-wrapper--compress">
+                        <label for="name" class="label">Descrição:</label>
+                        <textarea class="input" ng-model="newGroup.description" placeholder="Descrição do grupo"
+                                  TabIndex="2"/></textarea>
+                    </div>
+
+                    <div class="form-wrapper form-wrapper--compress">
+                        <label for="" class="label">Usuarios neste grupo:</label>
+                        <!--TAGS COMPONENT-->
+                        <zn-tags tags-array="[]" config="{
+                            name: 'Add group:',
+                            hint: 'groups',
+                            prefix: 'name',
+                            namespace: 'AddUserGroups',
+                            ID: 0
+                        }" class="input input--tags"></zn-tags>
+                        <!--END TAGS COMPONENT-->
+                    </div>
+
+                    <div class="form-wrapper action__row">
+                        <button type="button" class="btn--submit" ng-click="addGroup();">Cadastrar</button>
+                        <button type="button" class="btn--cancel" ng-click="cancel();">Cancelar</button>
+                    </div>
+                </form>
+            </zn-modal>
+
+            <!-- Delete Group modal -->
+            <zn-modal class="zuni-dialog zuni-dialog--clean" ng-class="{'zuni-dialog--open': deleteGroupModal}">
+                <div class="zuni-dialog__content__header">
+                    <span class="title">Deseja realmente excluir esse grupo?</span>
+                </div>
+                <div class="action__row">
+                    <button class="btn--cancel" ng-click="confirmDeleteGroup();">Excluir</button>
+                    <button class="btn--clean" ng-click="cancelDelete();">Cancelar</button>
+                </div>
+            </zn-modal>
+
+        </section>
+    </div>
+</main>
+<!-- End Application Content -->
+
+<!-- Application Footer -->
+<footer>
+
+</footer>
+<!-- End Application Footer -->

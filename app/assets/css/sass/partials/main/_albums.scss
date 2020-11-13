@@ -1,0 +1,341 @@
+.albums__list {
+    margin-top: 3em;
+    @include grid(12);
+}
+.albums__list__bx {
+    margin-left: -0.8em;
+    margin-right: -0.8em;
+    @extend .cf;
+    .album {
+        margin-bottom: 1.6em;
+        @include grid(2, 14);
+        @include breakpoint(up-to-xs) {
+            @include grid(12);
+        }
+        @include breakpoint(sm) {
+            @include grid(4);
+        }
+        @include breakpoint(from-md) {
+            @include grid(3);
+        }
+        @include breakpoint(from-lg) {
+            @include grid(2, 14);
+        }
+    }
+    .album-model-list {
+        padding-left: 28%;
+        .album__bx {
+            &:before {
+                padding: 0;
+            }
+            a {
+                position: relative;
+            }
+        }
+        .album__info {
+            @include vendor(box-shadow, none);
+        }
+    }
+    .btn-model-list {
+        .album__bx {
+            max-height: 270px;
+        }
+    }
+}
+
+
+.album__bx--public,
+.album__bx--private,
+.album__bx--share {
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        @include opacity(0);
+        @include vendor(transition, opacity .5s ease);
+
+        @include breakpoint(up-to-xs) {
+            @include opacity(1);
+        }
+    }
+
+    &:hover {
+        &:after {
+            @include opacity(10);
+        }
+    }
+}
+
+.album__bx--public {
+    &:after {
+        @extend .icons-icon-public-white;
+    }
+}
+
+.album__bx--private {
+    &:after {
+        @extend .icons-icon-private-white;
+    }
+}
+
+.albums__list--details {
+    .album {
+        @include grid(2);
+        @include breakpoint(up-to-xs) {
+            @include grid(12);
+        }
+        @include breakpoint(sm) {
+            @include grid(4);
+        }
+        @include breakpoint(from-md) {
+            @include grid(3);
+        }
+        @include breakpoint(from-lg) {
+            @include grid(3, 15);
+        }
+    }
+    .album-model-list {
+        padding-left: 28%;
+    }
+    .btn-model-list {
+        .album__bx {
+            max-height: 420px;
+        }
+    }
+}
+.albums__list__bx, .albums__list--details {
+    .album-model-list {
+        width: 100%;
+        float: left;
+        height: auto;
+        .album__image {
+            width: 52px;
+            float: left;
+            margin-right: 2em;
+        }
+        .album__info, .image__info {
+            position: relative;
+            background: transparent;
+            float: left;
+            width: auto;
+        }
+
+        .album__bx--public,
+        .album__bx--private,
+        .album__bx--share {
+            &:after {
+                top: 13px;
+                right: initial;
+            }
+        }
+    }
+    .btn-model-list {
+        position: absolute;
+        height: 100%;
+        border-right: 1px solid #515151;
+        padding-right: 30px;
+    }
+}
+.album__bx, .album__bx a, .album__image {
+    display: block;
+    height: 100%;
+}
+.album__bx {
+    position: relative;
+    @include vendor(border-radius, 3px);
+    &:before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+    }
+    a, .album__bx__upload__item {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+    .album__bx__upload__item {
+        canvas {
+            max-width: 100%;
+        }
+    }
+}
+.albums__list--create {
+    padding-bottom: 10em;
+    .album--add {
+        .album__bx {
+            &:before {
+                content: "";
+                display: block;
+                padding-top: 100%;
+            }
+        }
+    }
+    .album__bx {
+        &:before {
+            content: "";
+            display: block;
+            padding-top: initial;
+        }
+        a, .album__bx__upload__item {
+            position: relative;
+            width: 100%;
+        }
+    }
+    .album__edit__info {
+        padding: 2em 3em;
+        background: #1A1919;
+        form {
+            margin: 0;
+        }
+        .edit-image {
+            width: auto;
+            float: right;
+        }
+    }
+}
+.album__image {
+    height: 100%;
+    overflow: hidden;
+    img {
+        width: 100%;
+        @include vendor(transition, transform 0.5s ease);
+        &:hover {
+            @include vendor(transform, scale(1.1));
+        }
+    }
+}
+@-webkit-keyframes randomShow {
+    from {
+        @include opacity(0);
+    }
+    to {
+        @include opacity(1);
+    }
+}
+@for $i from 2 to 20 {
+    // .album:nth-child(#{$i}) {
+    //  .album__bx {
+    //      @include vendor(animation, randomShow 0.3s random(5)+s 1 alternate backwards);
+    //  }
+    // }
+}
+
+.image__info {
+  opacity: 0;
+  bottom: -27px;
+  transition: all .3s linear;
+}
+
+<<<<<<< HEAD
+.image__link { 
+=======
+.image__link {
+>>>>>>> develop
+  &:hover {
+    .image__info {
+      opacity: 1;
+      bottom: 0;
+    }
+  }
+}
+
+.album__info, .image__info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #000;
+    background: rgba(0, 0, 0, 0);
+    padding: 1em;
+    @include vendor(box-shadow, inset 0 -29px 36px 1px rgba(8, 8, 8, 0.79));
+
+    .name, .count {
+        display: block;
+        color: #fff;
+    }
+    .name {
+        word-wrap: break-word;
+        @extend %f15;
+        @include breakpoint(up-to-xs) {
+            font-size: 1.2em;
+        }
+    }
+    .count {
+        margin-top: 0.3em;
+        color: #c3c3c3;
+        @extend %f11;
+    }
+}
+//ALBUM BUTTON FOR ADD NEW IMAGES
+.add-new-album {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    border: 0.2em dashed $primary-color;
+    color: $primary-color;
+    cursor: pointer;
+
+    @extend %f20;
+    @include vendor(border-radius, 0);
+    @include vendor(box-shadow, none);
+    &:hover {
+        @include opacity(0.7);
+    }
+    &:before {
+        content: "";
+        display: block;
+        margin: 0 auto 1em;
+        @extend .icons-icon-add-photo;
+    }
+}
+.album__actions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    padding: 1em;
+}
+.album__actions--edit {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.album__actions--edit {
+    display: block;
+    .edit-button {
+        background: $primary-color;
+        display: block;
+        text-indent: -999em;
+        border: none;
+        padding: 0.5em;
+        cursor: pointer;
+        @include vendor(border-radius, 0);
+        @include vendor(box-shadow, none);
+        &:after {
+            content: "";
+            display: block;
+            @extend .icons-icon-editar;
+        }
+        &:hover {
+            background: #ACBB76;
+        }
+    }
+    .edit-button.active {
+        position: relative;
+        z-index: 10;
+        background: $red-color;
+        &:after {
+            margin: 1px 0 0 0;
+            @extend .icons-icon-cancel;
+        }
+    }
+}

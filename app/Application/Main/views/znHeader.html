@@ -1,0 +1,60 @@
+<header id="header">
+    <div class="header">
+        <div class="container">
+            <div class="header__logo">
+                <h1>
+                    <a ng-href="#/albums/">
+                        <img src="app/assets/imgs/logo/zuni--small.png" alt="Zuni">
+                    </a>
+                </h1>
+            </div>
+            <div class="header__user">
+                <span class="name">{{ user }}</span>
+            </div>
+            <div class="header__search">
+                <form zn-search="" ng-submit="search(album.id);" class="ng-pristine ng-valid">
+                    <fieldset>
+                        <label class="header__search__options" ng-if="showFilter === true">
+                            <button type="button" class="filter-title js-select-filter" ng-click="showFilters($event);">
+                                Pesquisar em
+                            </button>
+                            <ul>
+                                <li>
+                                    <button type="button" ng-click="selectFilter($event);">Neste album</button>
+                                </li>
+                                <li>
+                                    <button type="button" ng-click="selectFilter($event);">Todos os albuns</button>
+                                </li>
+                            </ul>
+                        </label>
+                        <label class="header__search__field">
+                            <input type="text" id="search-text" class="search__text"
+                                   placeholder="Digite o album que deseja buscar:">
+                        </label>
+                        <label class="submit__label">
+                            <button type="submit" class="submit__button"></button>
+                        </label>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="header__actions">
+                <div class="actions__settings">
+                    <button class="settings-button" ng-click="openSettings($event);"></button>
+                    <ul class="settings__nav active">
+                        <li><a ng-href="#/user/">Meus Dados</a></li>
+                        <li><a ng-href="#/user/manager">Gerenciar Usuários</a></li>
+                        <li><a ng-href="#/user/profiles">Gerenciar Perfis</a></li>
+                        <li><a ng-href="#/logout">Sair</a></li>
+                    </ul>
+                </div>
+                <div class="actions__layout">
+                    <button class="grid-button active" ng-class="{active: GridActive}" ng-init="GridActive = true"
+                            ng-click="setLayout('Grid');">Grid
+                    </button>
+                    <button class="list-button" ng-class="{active: ListActive}" ng-click="setLayout('List');">List
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

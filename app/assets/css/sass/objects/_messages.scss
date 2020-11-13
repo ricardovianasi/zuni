@@ -1,0 +1,25 @@
+.messages {
+	.title {
+		margin-bottom: 0;
+		text-align: left;
+		color: $primary-color;
+		@extend %f-regular;
+		@extend %f20;
+	}
+
+	.messages__list {
+		margin-bottom: 4em;	
+		.messages__list__item {
+			text-align: left;
+			color: #fff;
+			@extend %f-regular;
+			@extend %f16;
+		}
+	}
+
+	.action__row {
+		> button:first-child {
+			float: right;
+		}
+	}
+}

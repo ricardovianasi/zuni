@@ -1,0 +1,159 @@
+.albums__header {
+    background: #313032;
+    padding: 2em 0;
+    @extend .cf;
+    .header__info {
+        @include grid(4);
+        @include breakpoint(up-to-xs) {
+        @include grid(12);
+        }
+        form {
+            margin: 0;
+        }
+
+        &.header__info-grid9 {
+          @include grid(9);
+        }
+
+        &.header__info-grid3 {
+          @include grid(3);
+        }
+    }
+    .header__info--right {
+        @include prefix(2);
+    }
+    .header__info--left {
+        @include suffix(2);
+    }
+
+    .header__info--left,
+    .header__info--right {
+    	@include breakpoint(up-to-xs) {
+            @include prefix(0);
+            @include suffix(0);
+        }
+    }
+    h1 {
+        color: $primary-color;
+        @extend %f25;
+    }
+    .date {
+        margin: 0.7em 0;
+        @extend %f15;
+    }
+    .description, .location {
+        margin: 2em 0;
+        @extend %f15;
+    }
+    .description {
+        @extend %f14;
+        line-height: 1.6em;
+    }
+    .date {
+        color: #919191;
+    }
+    .location {
+        color: $red-color;
+    }
+    .location-address {
+        &:before {
+            content: "";
+            float: left;
+            margin: -0.4em 0.5em 0 0;
+            @extend .icons-icon-local;
+        }
+    }
+    .description {
+        color: #fff;
+    }
+    .albums__header__privacity, .albums__header__tags {
+        @extend .cf;
+    }
+    .albums__header__privacity {
+        margin-bottom: 3em;
+    }
+}
+.albums__actions--details {
+    @include grid(12);
+    @extend .cf;
+    .all-album {
+        float: left;
+    }
+    .edit-album {
+        float: right;
+        color: #212021;
+        &:before {
+            content: "";
+            display: block;
+            float: left;
+            margin: 0 0.9em 0 0;
+            @extend .icons-icon-editar;
+        }
+    }
+    .actions__left, .actions__right {
+        a, button {
+            display: block;
+            width: auto;
+            @extend %f14;
+        }
+    }
+}
+.details-photos {
+    @extend .cf;
+}
+.album__actions--edit-options, .album__actions--edit-form {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    background: #ccc;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 4em;
+}
+.album__actions--edit-options {
+    padding: 4em 8em;
+    ul {
+        padding: 0;
+        list-style: none;
+        display: block;
+        margin: 0 auto;
+        background: $primary-color;
+        overflow: hidden;
+        @include vendor(border-radius, 0.5em);
+        li {
+            display: block;
+            border-bottom: 1px solid #DFEDB6;
+            border-top: 1px solid #94B23E;
+            &:hover {
+                background: #9EB852;
+            }
+            > button, > a {
+                display: block;
+                border: none;
+                background: transparent;
+                width: 100%;
+                color: #fff;
+                padding: 1em 0;
+                cursor: pointer;
+                @include vendor(border-radius, 0);
+                @include vendor(box-shadow, none);
+                @include vendor(text-shadow, 1px 1px 1px #69734D);
+                @extend %f16;
+            }
+        }
+        li:first-child {
+            border-top: none;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+    }
+}
+.album__actions--edit-options.active {
+    display: block;
+}
+.photo-name {
+    color: $primary-color;
+}

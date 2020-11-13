@@ -1,0 +1,18 @@
+.container{
+	.user__data{
+		@include grid(12);
+		&.col__left{
+			@include grid(2);
+		}
+		h2{
+
+		}
+		form{
+			label{
+				color: #FFF
+			}
+			input{}
+			textarea{}
+		}
+	}
+}

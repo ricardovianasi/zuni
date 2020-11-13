@@ -1,0 +1,180 @@
+.tags__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    .tags__list__content {
+        @extend .cf;
+    }
+    .tags__list__content__item {
+        background: $tags-color;
+        display: inline-block;
+        margin: 0 0 0.5em 0.5em;
+        padding: 0.5em 1em;
+        color: $dashboard-background;
+        @extend %f12;
+        @include vendor(border-radius, 0.5em);
+    }
+    button, span {
+        float: left;
+    }
+    .remove {
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        margin: 3px 0 0 3px;
+        padding: 0;
+        padding-right: 0.4em;
+        border-right: 1px solid #D7AE6C;
+        width: auto;
+        text-indent: -999em;
+        @include vendor(border-radius, 0);
+        @include vendor(box-shadow, none);
+        @extend %f12;
+        &:before {
+            content: "";
+            display: block;
+            @extend .icons-icon-close-tag;
+        }
+    }
+    .remove + span {
+        padding: 1px 0 0.1em 0.4em;
+        border-left: 1px solid #FDE8C5;
+    }
+    span {
+        font-weight: bold;
+        color: #4D4D4D;
+    }
+}
+
+.tags__list--fixed {
+    height: 65px;
+    overflow: auto;
+}
+.tags__list--field {
+    position: relative;
+    background: #fff;
+    padding: 0.4em;
+    @include vendor(border-radius, 0.5em);
+    @extend .cf;
+    .tags__list__content__item, input {
+        padding: 0.2em 0.4em;
+        margin: 0.3em 0.2em;
+        float: left;
+    }
+    input {
+        box-shadow: none;
+        width: auto;
+        display: inline-block;
+        max-width: 135px;
+    }
+}
+
+.tags__list--disabled {
+    background: #ccc;
+}
+
+.tag__list--horizontal {
+    position: relative;
+    padding: 0.4em 4em 0.4em 0.4em;
+    .show-more {
+        position: absolute;
+        right: 13px;
+        top: 15px;
+        border-width: 7px;
+        border-color: #000 transparent transparent transparent;
+        border-style: solid;
+        background-color: transparent;
+        display: inline-block;
+        width: auto;
+        padding: 0;
+        @include vendor(border-radius, 0);
+    }
+    .tags__list__content {
+        max-height: 29px;
+        overflow: hidden;
+    }
+    .tags__list__content.open {
+        max-height: auto;
+        overflow: visible;
+    }
+    .tags__list__content + .tags__create {
+        display: none;
+    }
+    .tags__list__content.open + .tags__create {
+        display: block;
+    }
+    .tags__create.showInput {
+        display: block;
+    }
+}
+.tags__list--right {
+    float: right;
+}
+.tags__list--left {
+    float: left;
+}
+.tags__list__content {} .tags__create {
+    display: inline-block;
+    float: left;
+}
+.tags__autocomplete {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 37px;
+    overflow: hidden;
+    background: #fff;
+    z-index: 100;
+    @include vendor(border-bottom-right-radius, 0.5em);
+    @include vendor(border-bottom-left-radius, 0.5em);
+    @include vendor(box-shadow, 0 4px 1px 0px #5B6933);
+    .tags__autocomplete__title {
+        display: block;
+        float: none;
+        margin: 1em;
+        color: #4F4F4F;
+        font-size: 1.6em;
+    }
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        height: 160px;
+        max-height: 160px;
+        overflow: auto;
+        @include vendor(box-shadow, inset 0 4px 10px #DBDBDB);
+    }
+    ul::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #F5F5F5;
+    }
+    ul::-webkit-scrollbar {
+        width: 6px;
+        background-color: #F5F5F5;
+    }
+    ul::-webkit-scrollbar-thumb {
+        background-color: #688417;
+    }
+    li {
+        padding: 0 0.5em;
+        color: $primary-color;
+        border-left: 3px solid $primary-color;
+        word-wrap: break-word;
+        cursor: pointer;
+        height: 31px;
+        line-height: 2;
+        @extend %f14;
+        @extend %f-bold;
+        &:hover {
+            background: $primary-color;
+            color: #4F4F4F;
+        }
+    }
+    li.active {
+        background: $primary-color;
+        color: #4F4F4F;
+    }
+    li:first-child {
+        border-top: none;
+    }
+}

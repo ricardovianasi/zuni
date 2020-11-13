@@ -1,0 +1,88 @@
+<!-- Application Header -->
+<zn-header user="currentUser"></zn-header>
+<!-- End Application Header -->
+
+<!-- Application Content -->
+<main>
+    <div class="container">
+        <div zn-manage-album class="albums">
+            <div class="albums__actions">
+                <div class="actions__left">
+                    <h1 class="search-title">Resultado de busca para: <span>{{ title }}</span></h1>
+                </div>
+                <div class="actions__right">
+                    <div class="filter__area">
+                        <span class="title">Filtrar por:</span>
+                        <div class="filter">
+                            <select
+                                ng-model="searchFilter.year"
+                                ng-if="filter.years.length > 0"
+                                ng-change="searchFilter.year ? true : (searchFilter.year = '')"
+                                ng-options="year for year in filter.years">
+                                <option value="" selected>-- Ano --</option>
+                            </select>
+                        </div>
+                        <div class="filter">
+                            <select
+                                ng-model="searchFilter.location"
+                                ng-if="filter.locations"
+                                ng-change="searchFilter.location ? true : (searchFilter.location = '')"
+                                ng-options="location for location in filter.locations">
+                                <option value="" selected>-- Local --</option>
+                            </select>
+                        </div>
+                        <div class="filter">
+                            <select
+                                ng-model="searchFilter.owner"
+                                ng-if="filter.owners"
+                                ng-change="searchFilter.owner ? true : (searchFilter.owner = '')"
+                                ng-options="owner for owner in filter.owners">
+                                <option value="" selected>-- Autor --</option>
+                            </select>
+                        </div>
+                        <div class="filter">
+                            <select
+                                ng-model="searchFilter.size"
+                                ng-if="filter.sizes"
+                                ng-change="searchFilter.size ? true : (searchFilter.size = '')"
+                                ng-options="size for size in filter.sizes">
+                                <option value="" selected>-- Tamanho --</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="albums__list">
+                <div class="albums__list__bx">
+                    <div
+                        class="album js-album-item"
+                        ng-repeat="photo in photos | filter: {
+                        location: searchFilter.location,
+                        owner: searchFilter.owner,
+                        size: searchFilter.size,
+                        year: searchFilter.year
+                    }">
+                        <div class="album__bx">
+                            <a ng-href="#/albums/{{ photo.album.id }}/{{ photo.id }}" title="{{ photo.name }}">
+                                <div class="album__image">
+                                    <img ng-src="{{ photo.thumbnail_url }}" alt="{{ photo.name }}">
+                                </div>
+                                <div class="album__info" ng-if="photo.description">
+                                    <span class="name">{{ photo.description }}</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- End Application Content -->
+
+<!-- Application Footer -->
+<footer>
+
+</footer>
+<!-- End Application Footer -->

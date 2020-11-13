@@ -1,0 +1,304 @@
+.header {
+	padding: 1em 0;
+	background: $primary-color;
+}
+.header__logo {
+	@include grid(0.9);
+
+	@include breakpoint(up-to-md) {
+		@include grid(2);
+	}
+
+	@include breakpoint(up-to-xs) {
+		@include grid(5);
+	}
+
+	img {
+		display: block;
+		max-width: 80px;
+	}
+}
+.header__user {
+	margin-top: 7px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	@include grid(2);
+
+	@include breakpoint(up-to-md) {
+		display: none;
+	}
+	.name {
+		display: block;
+		text-align: left;
+		line-height: 12px;
+		color: #212020;
+		letter-spacing: 3px;
+	}
+
+	.name {
+		@extend %f14;
+		@extend %f-bold;
+	}
+}
+.header__search {
+	@include grid(6);
+
+	@include breakpoint(up-to-md) {
+		@include grid(8);
+	}
+
+	@include breakpoint(up-to-xs) {
+		display: none;
+	}
+
+	form {
+		position: relative;
+		margin: 0;
+	}
+	.search__text {
+		padding: 1em 4em 1em 1em;
+	}
+	.submit__label {
+		position: absolute;
+		top: 1em;
+		right: 2em;
+		float: none;
+		width: auto;
+		margin: 0;
+		.submit__button {
+			display: block;
+			cursor: pointer;
+			background-color: transparent;
+			border: none;
+			text-indent: -999em;
+			@extend .icons-icon-search;
+		}
+	}
+}
+.header__actions {
+	margin-top: 0.5em;
+	@include grid(1.5);
+	@include prefix(1.5);
+
+	@include breakpoint(up-to-lg) {
+		@include grid(3);
+		@include prefix(0);
+	}
+
+	@include breakpoint(up-to-md) {
+		@include grid(2);
+		@include prefix(0);
+	}
+
+	@include breakpoint(up-to-xs) {
+		@include grid(7);
+		@include prefix(0);
+	}
+
+}
+.actions__layout, .actions__settings {
+	float: right;
+	position: relative;
+	button,
+	a {
+		cursor: pointer;
+	}
+}
+.actions__layout {
+	padding-right: 5px;
+	border-right: 1px solid #94B23E;
+	@include breakpoint(up-to-sm) {
+		padding-right: 0;
+		border-right: none;
+	}
+}
+.actions__settings {
+	padding-left: 5px;
+	border-left: 1px solid #DFEDB6;
+	@include breakpoint(up-to-sm) {
+		display: none;
+	}
+}
+.settings__nav {
+	display: none;
+	position: absolute;
+	background: #3C3C3C;
+	padding: 0.8em 1.5em;
+	z-index: 40;
+	min-width: 20em;
+	top: 31px;
+	right: 0;
+
+	@include vendor(border-radius, 0.5em);
+
+	li, a {
+		display: block;
+	}
+	li {
+		border-bottom: 1px solid #000;
+		border-top: 1px solid #6C6C6C;
+	}
+	li:first-child {
+		border-top: none;
+	}
+	li:last-child {
+		border-bottom: none;
+	}
+	a {
+		padding: 0.7em 0;
+		color: #fff;
+		text-align: right;
+		@extend %f13;
+	}
+}
+.list-button.active, .grid-button.active {
+	@include opacity(1);
+}
+.grid-button, .list-button, .settings-button {
+	border: none;
+	background-color: transparent;
+	text-indent: -999em;
+	margin: 0 0.5em;
+	padding: 0.3em;
+	float: left;
+
+	@include vendor(border-radius, 0);
+	@include vendor(box-shadow, none);
+	&:hover {
+		@include opacity(0.5);
+	}
+}
+
+.grid-button,
+.list-button {
+	@include opacity(0.5);
+}
+
+.grid-button {
+	@extend .icons-icon-grid-button;
+}
+.list-button {
+	@extend .icons-icon-list-button;
+}
+.settings-button {
+	margin: -4px 0 0 0;
+
+	@include vendor(border-radius, 0);
+	@include vendor(box-shadow, none);
+	&:before {
+		content: "";
+		display: block;
+		@extend .icons-icon-settings-button;
+	}
+}
+
+.settings-button.active {
+	background: #3C3C3C;
+	@include vendor(border-top-right-radius, 0.5em);
+	@include vendor(border-top-left-radius, 0.5em);
+	&:before {
+		@extend .icons-icon-settings-button-white;
+	}
+
+	&:hover {
+		@include opacity(1);
+	}
+
+	& + .settings__nav {
+		display: block;
+	}
+}
+
+.header__search__field {
+	//width: 100%;
+}
+
+.header__search__options + .header__search__field {
+	width: 80%;
+	float: left;
+	margin-top: 0;
+
+	@include breakpoint(up-to-md) {
+		width: 70%;
+	}
+
+	input {
+		@include vendor(border-radius, 0);
+
+		@include vendor(border-top-right-radius, 0.5em);
+		@include vendor(border-bottom-right-radius, 0.5em);
+	}
+}
+
+
+.header__search__options {
+	position: relative;
+	width: 20%;
+	float: left;
+	background: #5d693a;
+
+	@include breakpoint(up-to-md) {
+		width: 30%;
+	}
+
+	@include vendor(border-top-left-radius, 0.5em);
+	@include vendor(border-bottom-left-radius, 0.5em);
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: none;
+		position: absolute;
+		background: #5d693a;
+		width: 100%;
+		margin-top: -3px;
+		z-index: 5;
+		overflow: hidden;
+
+		@include vendor(border-bottom-left-radius, 0.5em);
+		@include vendor(border-bottom-right-radius, 0.5em);
+	}
+
+	ul.active {
+		display: block;
+		border-top: 1px solid #4C5630;
+		@include vendor(box-shadow, 0 8px 10px #242819);
+	}
+
+	li:hover {
+		background: #69773F;
+	}
+
+	button, a {
+		background: transparent;
+		color: #fff;
+		text-align: center;
+		cursor: pointer;
+
+		@include vendor(border-radius, 0);
+		@include vendor(box-shadow, none);
+	}
+
+	.filter-title {
+		position: relative;
+		padding: 1em 1em;
+		&:before {
+			content: "";
+			float: right;
+			display: block;
+			margin-top: 4px;
+
+			border-style: solid;
+			border-color: #fff transparent transparent transparent;
+			border-width: 5px;
+		}
+	}
+
+	.filter-title.active {
+		&:before {
+			margin-top: 0;
+			border-color: transparent transparent #fff transparent;
+		}
+	}
+}

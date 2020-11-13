@@ -1,0 +1,178 @@
+.upload__bx {
+    position: relative;
+    height: 100%;
+    @extend .cf;
+    > .title {
+        position: absolute;
+        top: -3.3em;
+        left: -1.3em;
+        width: 100%;
+        text-align: left;
+        font-size: 3em;
+        margin: 0;
+        padding: 0;
+        color: #b9d174;
+        text-transform: uppercase;
+    }
+    .upload__bx__header {
+        .title, .sub-title {
+            text-align: left;
+            @extend %f-regular;
+        }
+        .title {
+            color: $primary-color;
+            @extend %f15;
+        }
+        .sub-title {
+            color: #fff;
+            @extend %f13;
+        }
+        strong {
+            color: $primary-color;
+        }
+    }
+    .upload__bx__photos {
+        position: relative;
+        height: 100%;
+        @include grid(7);
+        &:after {
+            @extend %grafism;
+            bottom: 0;
+            @include vendor(transform, rotate(180deg));
+        }
+        &:before {
+            @extend %grafism;
+            top: 0;
+        }
+    }
+    //Grafism model
+    %grafism {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 25px;
+        left: 16px;
+        max-width: 915px;
+        background: url("../../imgs/backgrounds/photos-grafism.png")no-repeat center;
+        background-size: cover;
+        z-index: 100;
+    }
+    .upload__bx__photos__container {
+        max-height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .upload__bx__photos__container::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #F5F5F5;
+    }
+    .upload__bx__photos__container::-webkit-scrollbar {
+        width: 6px;
+        background-color: #F5F5F5;
+    }
+    .upload__bx__photos__container::-webkit-scrollbar-thumb {
+        background-color: #161617;
+    }
+    .upload__bx__album {
+        @include grid(5);
+        padding: 0 4em;
+        height: 100%;
+        overflow: auto;
+        .title {
+            color: $primary-color;
+            text-align: left;
+            @extend %f-regular;
+            @extend %f25;
+        }
+        .submit-button {
+            width: auto;
+            float: right;
+        }
+        .title-label {
+            display: block;
+            text-align: left;
+            font-size: 1.4em;
+            margin-bottom: 1em;
+            color: #b9d174;
+        }
+        .submit-row {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    }
+    .thumb {
+        @include grid(4);
+        margin-bottom: 2em;
+        @include breakpoint(up-to-lg) {
+            @include grid(6);
+        }
+    }
+    .thumb__bx__image {
+        canvas {
+            max-width: 100%;
+        }
+    }
+    .thumb__bx__info {
+        background: #1B1B1B;
+        padding: 2.5em;
+        margin-top: -2px;
+        form {
+            margin: 0;
+        }
+    }
+    .privacity__bx {
+        .title {
+            float: left;
+            padding: 0;
+        }
+        .privacity__select {
+            float: left;
+            margin-left: 4em;
+        }
+        .privaicty__bx__tags {
+            margin-bottom: 2em;
+            padding-bottom: 2em;
+            border-bottom: 1px solid #fff;
+            .sub-title {
+                color: #fff;
+                text-align: left;
+                margin-bottom: 1em;
+                @extend %f14;
+                @extend %f-regular;
+            }
+        }
+        .privacity__bx__header {
+            margin-bottom: 2em;
+            @extend .cf;
+        }
+    }
+}
+.upload__ready {
+    .title {
+        display: block;
+        color: #fff;
+        text-align: left;
+        @extend %f20;
+    }
+    .upload__ready__bx {
+        background: #1B1B1B;
+        width: 100%;
+        height: 15px;
+        padding: 0.2em;
+        @include vendor(transition, opacity .2s ease-in-out);
+    }
+    .cancel-ready {
+        color: $red-color;
+        padding: 0;
+        margin-top: 2em;
+        @extend %f15;
+    }
+    .progress {
+        display: block;
+        background: #b9d174;
+        width: 0;
+        height: 100%;
+    }
+}

@@ -1,0 +1,16 @@
+<div class="privacity__select" ng-class="{'privacity__select--right': align === 'right'}">
+    <div class="privacity__select__button" ng-click="openOptions();">
+        <span class="privacity__option"
+              ng-class="{'privacity__option--public': privacity, 'privacity__option--private': !privacity}">{{ privacityText }}</span>
+        <button class="select-privacity"></button>
+    </div>
+    <ul class="privacity__options">
+        <li>
+            <button class="privacity__option--public" ng-click="selectPrivacity('public');">Álbum público</button>
+        </li>
+        <li>
+            <button class="privacity__option--private" ng-click="selectPrivacity('private');">Álbum privado</button>
+        </li>
+    </ul>
+    <input type="hidden" class="js-privacity-value">
+</div>

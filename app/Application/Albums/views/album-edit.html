@@ -1,0 +1,187 @@
+<!-- Application Header -->
+<zn-header filter="true" album="vm.detail.album" user="currentUser"></zn-header>
+<!-- End Application Header -->
+
+<!-- Application Content -->
+<main>
+    <div class="container">
+        <div zn-select class="albums">
+            <div class="albums__header">
+                <div class="header__info header__info--left">
+                    <div class="albums__header__details">
+                        <form>
+                            <fieldset>
+                                <label>
+                                    <input type="text" placeholder="Digite o nome do album"
+                                           ng-model="vm.detail.album.name">
+                                </label>
+                                <label class="location-field">
+                                    <angucomplete-alt
+                                        id="album_edit_location"
+                                        placeholder="Endereço do Álbum"
+                                        selected-object="vm.detail.album.location"
+                                        local-data="vm.LocationHints"
+                                        search-fields="name"
+                                        title-field="name"
+                                        initial-value="{{vm.detail.album.location.name}}"
+                                        input-class="selectize-input location-field"
+                                        override-suggestions="true">
+                                </label>
+                                <label>
+                                    <textarea name="" cols="30" rows="5" placeholder="Descrição do album"
+                                              ng-model="vm.detail.album.description"></textarea>
+                                </label>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="header__info header__info--right">
+                    <div class="albums__header__privacity">
+                        <zn-select-privacity position="right"
+                                             privacity="vm.detail.album.visibility"></zn-select-privacity>
+
+                        <div class="privacity__bx__tags" ng-if="privacityOption !== 'public'">
+                            <h3 class="sub-title">Selecione abaixo as pessoas que terão acesso a este album:</h3>
+
+                            <ui-select multiple ng-model="vm.detail.album.share" theme="select2" ng-disabled="disabled">
+                                <ui-select-match placeholder="Compartilhar com:">{{ $item.name }}</ui-select-match>
+                                <ui-select-choices repeat="node in UsersGroupsHints | filter:$select.search">
+                                    {{node.name}}
+                                </ui-select-choices>
+                            </ui-select>
+
+                        </div>
+                    </div>
+                    <div class="albums__header__tags">
+                        <ui-select multiple tagging="tagTransform" tagging-label="false" tagging-tokens=","
+                                   ng-model="vm.detail.album.tags" theme="select2" ng-disabled="disabled">
+                            <ui-select-match placeholder="Tags:">{{ $item.tag ? $item.tag : $item.name }}
+                            </ui-select-match>
+                            <ui-select-choices repeat="tag in TagsHints | filter:$select.search">
+                                {{ tag.tag ? tag.tag : tag.name }}
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="albums__actions">
+                    <div zn-update-album class="main__actions">
+                        <button class="btn--grey action action--right" ng-click="update(vm.detail.album.id);">Concluir
+                            edição
+                        </button>
+                        <button class="btn--clean action action--right" ng-click="cancel(vm.detail.album.id);">
+                            Cancelar
+                        </button>
+                        <button class="btn--cancel action action--left" ng-click="delete();">Excluir álbum</button>
+
+
+                        <!-- Delete modal -->
+                        <zn-modal class="zuni-dialog js-delete-album">
+                            <div zn-delete-album>
+                                <div class="zuni-dialog__content__header">
+                                    <span class="title">Deseja realmente excluir esse álbum?</span>
+                                </div>
+                                <div class="action__row">
+                                    <button class="btn--cancel" ng-click="confirmDelete(vm.detail.album.id);">Excluir
+                                    </button>
+                                    <button class="btn--clean" ng-click="cancelDelete();">Cancelar</button>
+                                </div>
+                            </div>
+                        </zn-modal>
+
+                    </div>
+                </div>
+            </div>
+            <div class="albums__list albums__list--details albums__list--create">
+                <div class="albums__list__bx">
+                    <div class="album album--add js-add-photo" ng-hide="true">
+                        <div class="album__bx">
+                            <button class="add-new-album">Incluir Fotos</button>
+                        </div>
+                    </div>
+                    <div class="album js-album-item" data-id="{{ photo.id }}" ng-repeat="photo in ::vm.detail.photos">
+                        <div class="album__bx">
+                            <div class="album__bx__upload__item">
+                                <div class="album__image">
+                                    <img ng-src="{{ photo.thumbnail_url }}" alt="{{ photo.name }}">
+                                </div>
+                                <div class="album__edit__info">
+                                    <form>
+                                        <fieldset>
+                                            <label for="date-{{index}}" class="dual">
+                                                <input zn-date-mask type="text" id="date-{{index}}"
+                                                       ng-model="photo.formatted_date" placeholder="__/__/____" required
+                                                       maxlength="10" TabIndex="1" ng-disabled="photo.noDate"
+                                                       class="js-date">
+                                            </label>
+                                            <label for="no-date-{{ index }}" class="dual">
+                                                <!-- <span class="check-button">
+                                                    <input type="checkbox" id="no-date-{{index}}" ng-click="ignoreDate();">
+                                                    <span>Sem data</span>
+                                                </span> -->
+                                                <label class="dual">
+                                                    <span class="check-button">
+                                                        <input type="checkbox" ng-model="photo.noDate"
+                                                               ng-init="photo.noDate = (photo.formatted_date ? false : true)">
+                                                        <span>Sem data</span>
+                                                    </span>
+                                                </label>
+                                            </label>
+                                            <label class="location-field">
+                                                <angucomplete-alt
+                                                    id="thumb_edit_location"
+                                                    placeholder="Endereço da Foto"
+                                                    selected-object="photo.location"
+                                                    local-data="vm.LocationHints"
+                                                    search-fields="name"
+                                                    title-field="name"
+                                                    initial-value="{{ (photo.location ? photo.location.name : '') }}"
+                                                    input-class="selectize-input location-field js-location"
+                                                    override-suggestions="true">
+                                            </label>
+                                            <label for="author" class="author-field">
+                                                <angucomplete-alt
+                                                    id="thumb_edit_owner"
+                                                    placeholder="Autor da Foto"
+                                                    selected-object="photo.owner"
+                                                    local-data="vm.AuthorHints"
+                                                    search-fields="name"
+                                                    title-field="name"
+                                                    initial-value="{{photo.owner.name}}"
+                                                    input-class="selectize-input location-field js-author"
+                                                    override-suggestions="true">
+                                            </label>
+                                            <label>
+                                                <ui-select multiple tagging="tagTransform" tagging-label="false"
+                                                           tagging-tokens="," ng-model="photo.tags" theme="select2"
+                                                           ng-disabled="disabled">
+                                                    <ui-select-match placeholder="Tags:">{{ $item.tag ? $item.tag :
+                                                        $item.name }}
+                                                    </ui-select-match>
+                                                    <ui-select-choices
+                                                        repeat="tag in TagsHints | filter:$select.search">
+                                                        {{ tag.tag ? tag.tag : tag.name }}
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </label>
+                                            <label>
+                                                <textarea name="" cols="30" rows="5" ng-model="photo.description"
+                                                          TabIndex="4" class="js-description"></textarea>
+                                            </label>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- End Application Content -->
+
+<!-- Application Footer -->
+<footer>
+
+</footer>
+<!-- End Application Footer -->
